@@ -44,13 +44,19 @@
     }
 
     /* ── Full-width animation ── */
-    .anim-full {
-      width: 100vw;
-      height: 640px;
+    .anim-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       margin-bottom: 52px;
       background: #04070e;
+    }
+    .anim-full {
+      width: 100%;
+      max-width: 1140px;
+      height: 660px;
     }
     .anim-full iframe {
       width: 100%;
@@ -115,11 +121,13 @@
   </div>
 
   <!-- FULL-WIDTH ANIMATION -->
-  <div class="anim-full">
-    <iframe src="ion_solvation.html"
-            title="Ion–Solvent Binding · Average Solvation Number"
-            allowfullscreen>
-    </iframe>
+  <div class="anim-wrapper">
+    <div class="anim-full">
+      <iframe src="ion_solvation.html"
+              title="Ion–Solvent Binding · Average Solvation Number"
+              allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
   <!-- THEORY -->
