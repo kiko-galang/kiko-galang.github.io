@@ -1,1 +1,1 @@
-# kiko-galang.gthib.io
+# kiko-galang.github.io
