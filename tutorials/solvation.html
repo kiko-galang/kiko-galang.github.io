@@ -6,230 +6,152 @@
   <title>Ion Solvation | Kiko Galang</title>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: Georgia, serif;
+      max-width: 820px;
+      margin: 60px auto;
+      padding: 0 24px;
       color: #222;
-      background: #fff;
       line-height: 1.8;
     }
-
-    /* ── Top nav strip ── */
-    .topbar {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 28px 24px 0;
-    }
-    .topbar a {
-      font-size: 0.88em;
-      color: #1a0dab;
-      text-decoration: none;
-    }
-    .topbar a:hover { text-decoration: underline; }
-
-    /* ── Title block ── */
-    .title-block {
-      max-width: 820px;
-      margin: 18px auto 28px;
-      padding: 0 24px;
-    }
-    .title-block h1 {
-      font-size: 1.85em;
-      margin-bottom: 4px;
-    }
-    .title-block .subtitle {
-      color: #555;
-      font-size: 0.95em;
-    }
-
-    /* ── Full-width animation ── */
-    .anim-wrapper {
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1 { font-size: 1.9em; margin-bottom: 4px; }
+    .subtitle { color: #555; margin-top: 0; margin-bottom: 40px; }
+    h2 { border-bottom: 1px solid #ddd; padding-bottom: 6px; margin-top: 48px; }
+    h3 { margin-top: 32px; }
+    .animation-container {
       width: 100%;
-      display: flex;
-      justify-content: center;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 52px;
-      background: #04070e;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 32px 0;
     }
-    .anim-full {
+    .animation-container iframe {
       width: 100%;
-      max-width: 1140px;
-      height: 660px;
-    }
-    .anim-full iframe {
-      width: 100%;
-      height: 100%;
+      height: 500px;
       border: none;
       display: block;
     }
-
-    /* ── Theory content ── */
-    .content {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
-
-    h2 {
-      font-size: 1.25em;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 6px;
-      margin: 44px 0 16px;
-    }
-    h3 {
-      font-size: 1.05em;
-      margin: 32px 0 10px;
-    }
-    p { margin-bottom: 1em; }
-
     .equation-block {
       background: #f9f9f9;
-      border-left: 3px solid #bbb;
-      padding: 14px 22px;
+      border-left: 3px solid #aaa;
+      padding: 12px 20px;
       margin: 20px 0;
       border-radius: 0 4px 4px 0;
       overflow-x: auto;
     }
-
-    .references {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
-      font-size: 0.88em;
-      color: #444;
-    }
-    .references h2 {
-      font-size: 1em;
-      border: none;
-      padding: 0;
-      margin: 0 0 10px;
-    }
-    .references p { margin-bottom: 0.4em; }
+    .back-link { margin-bottom: 40px; display: block; font-size: 0.9em; }
+    .references { font-size: 0.88em; color: #444; margin-top: 60px; }
+    .references h2 { font-size: 1em; }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <a href="../index.html">← Back to home</a>
+  <a class="back-link" href="../index.html">← Back to home</a>
+
+  <h1>Ion Solvation in Concentrated Electrolytes</h1>
+  <p class="subtitle">An interactive tutorial on solvation thermodynamics and activity coefficient corrections</p>
+
+  <h2>Interactive Animation</h2>
+  <p>
+    The animation below shows how solvent molecules partition between free bulk solvent
+    and bound hydration shells as ion concentration increases. Use the controls to
+    explore how the binding constant \( k_i \) and number of sites \( \mathcal{N}_i \)
+    affect the free solvent fraction.
+  </p>
+
+  <div class="animation-container">
+    <iframe src="ion_solvation.html" title="Ion solvation animation"></iframe>
   </div>
 
-  <div class="title-block">
-    <h1>Ion Solvation in Concentrated Electrolytes</h1>
-    <p class="subtitle">An interactive tutorial on solvation thermodynamics and activity coefficient corrections</p>
+  <h2>Theory</h2>
+
+  <p>
+    In concentrated solutions, accounting for solvation is necessary. Solvation adjusts
+    the entropy of mixing because a non-trivial fraction of solvent molecules is removed
+    from the free bulk pool when they form ion hydration shells. Ideal mixing assumes all
+    solvent molecules contribute to the mixing entropy; solvation relaxes this assumption
+    by distinguishing bound vs. unbound solvent and solvated vs. unsolvated ions.
+  </p>
+
+  <p>
+    This process is modeled as a series of binding equilibria governed by a microscopic
+    solvent–ion binding constant \( k_i \) and a maximum number of available sites
+    \( \mathcal{N}_i \) on the ion. The contribution of solvation to non-ideality is
+    expressed through the excess Gibbs free energy:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \frac{\Delta G^{\mathrm{slv}}}{RT}
+    = n_0 \ln \alpha_0
+    + \sum_{i \neq 0} n_i \ln\!\left(\frac{\alpha_i}{\alpha_i^{\infty}}\right)
+    $$
   </div>
 
-  <!-- FULL-WIDTH ANIMATION -->
-  <div class="anim-wrapper">
-    <div class="anim-full">
-      <iframe src="ion_solvation.html"
-              title="Ion–Solvent Binding · Average Solvation Number"
-              allowfullscreen>
-      </iframe>
-    </div>
+  <p>
+    Here \( x_0 \) and \( x_i \) are the overall mole fractions of solvent and ion \( i \),
+    while \( x_0^{\mathrm{slv}} \) and \( x_i^{\mathrm{slv}} \) are the mole fractions of
+    the <em>free</em> (unbound) solvent and <em>unsolvated</em> ions.
+  </p>
+
+  <h3>Correction Factors</h3>
+
+  <p>
+    The <strong>solvent correction</strong> \( \alpha_0 = x_0^{\mathrm{slv}} / x_0 \)
+    accounts for depletion of free solvent into hydration shells:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \alpha_0 = \gamma_0^{\mathrm{slv}}
+    = \frac{x_0^{\mathrm{slv}}}{x_0}
+    = \frac{1 - \displaystyle\sum_i \bar{h}_i \frac{x_i}{x_0}}
+           {x_0 + \displaystyle\sum_i x_i (1 - \bar{h}_i)}
+    $$
   </div>
 
-  <!-- THEORY -->
-  <div class="content">
+  <p>
+    The <strong>solute correction</strong> \( \alpha_i = x_i^{\mathrm{slv}} / x_i \)
+    accounts for the fraction of ions remaining unbound at equilibrium. Normalized to
+    its infinite-dilution value \( \alpha_i^\infty \), it gives the solvation activity
+    coefficient:
+  </p>
 
-    <h2>Theory</h2>
+  <div class="equation-block">
+    $$
+    \gamma_i^{\mathrm{slv}} = \frac{\alpha_i}{\alpha_i^{\infty}}
+    = \frac{(1 + k_i)^{N_i}}
+           {x_0 \bigl(1 + k_i x_0\bigr)^{N_i}
+           \left(1 + \displaystyle\sum_{j \neq 0} \frac{x_j}{x_0}(1 - \bar{h}_j)\right)}
+    $$
+  </div>
 
+  <p>
+    The average number of solvent molecules bound to ion \( i \) is given by the
+    Langmuir-type expression:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \bar{h}_i = \frac{N_i k_i x_0^{\mathrm{slv}}}{1 + k_i x_0^{\mathrm{slv}}}
+    $$
+  </div>
+
+  <p>
+    The system is <strong>implicit</strong>: \( \bar{h}_i \) depends on the free solvent
+    fraction \( x_0^{\mathrm{slv}} \), which itself depends on all \( \bar{h}_i \). This
+    requires iterative solution.
+  </p>
+
+  <div class="references">
+    <h2>References</h2>
     <p>
-      In concentrated solutions, accounting for solvation is necessary. Solvation adjusts
-      the entropy of mixing because a non-trivial fraction of solvent molecules is removed
-      from the free bulk pool when they form ion hydration shells. Ideal mixing assumes all
-      solvent molecules contribute to the mixing entropy; solvation relaxes this assumption
-      by distinguishing bound vs. unbound solvent and solvated vs. unsolvated ions.
+      Stokes, R. H. &amp; Robinson, R. A. (1948). <em>J. Am. Chem. Soc.</em><br>
+      Zerres, H. &amp; Prausnitz, J. M. (1994). <em>AIChE J.</em><br>
+      Schönert, H. (1990). <em>J. Solution Chem.</em>
     </p>
-
-    <p>
-      This process is modeled as a series of binding equilibria governed by a microscopic
-      solvent–ion binding constant \( k_i \) and a maximum number of available sites
-      \( \mathcal{N}_i \) on the ion. The contribution of solvation to non-ideality is
-      expressed through the excess Gibbs free energy:
-    </p>
-
-    <div class="equation-block">
-      $$
-      \frac{\Delta G^{\mathrm{slv}}}{RT}
-      = n_0 \ln \alpha_0
-      + \sum_{i \neq 0} n_i \ln\!\left(\frac{\alpha_i}{\alpha_i^{\infty}}\right)
-      $$
-    </div>
-
-    <p>
-      Here \( x_0 \) and \( x_i \) are the overall mole fractions of solvent and ion \( i \),
-      while \( x_0^{\mathrm{slv}} \) and \( x_i^{\mathrm{slv}} \) are the mole fractions of
-      the <em>free</em> (unbound) solvent and <em>unsolvated</em> ions.
-    </p>
-
-    <h3>Average Solvation Number</h3>
-
-    <p>
-      The average number of solvent molecules bound to ion \( i \) follows a Langmuir-type
-      saturation expression:
-    </p>
-
-    <div class="equation-block">
-      $$
-      \bar{h}_i = \frac{N_i\, k_i\, x_0^{\mathrm{slv}}}{1 + k_i\, x_0^{\mathrm{slv}}}
-      $$
-    </div>
-
-    <p>
-      where \( N_i \) is the total number of independent solvation sites and \( k_i \) is
-      the microscopic binding constant at a single site. The animation above shows this
-      saturation in real time — bound waters (glowing) vs. free waters (dim) as you vary
-      \( k \), \( N \), and concentration \( c \).
-    </p>
-
-    <h3>Correction Factors</h3>
-
-    <p>
-      The model distinguishes <em>apparent</em> mole fractions (total species, \( x_k \))
-      from <em>true</em> mole fractions of free species (\( x_k^{\mathrm{slv}} \)).
-      The <strong>solvent correction</strong> \( \alpha_0 \) accounts for depletion of
-      free solvent into hydration shells:
-    </p>
-
-    <div class="equation-block">
-      $$
-      \alpha_0 = \gamma_0^{\mathrm{slv}} = \frac{x_0^{\mathrm{slv}}}{x_0}
-      = \frac{1 - \displaystyle\sum_i \bar{h}_i \frac{x_i}{x_0}}
-             {x_0 + \displaystyle\sum_i x_i\,(1 - \bar{h}_i)}
-      $$
-    </div>
-
-    <p>
-      The <strong>solute correction</strong> \( \alpha_i \), normalized to its
-      infinite-dilution value \( \alpha_i^\infty \), gives the solvation activity
-      coefficient \( \gamma_i^{\mathrm{slv}} \):
-    </p>
-
-    <div class="equation-block">
-      $$
-      \gamma_i^{\mathrm{slv}} = \frac{\alpha_i}{\alpha_i^{\infty}}
-      = \frac{(1 + k_i)^{N_i}}
-             {x_0\,(1 + k_i x_0)^{N_i}
-             \left(1 + \displaystyle\sum_{j \neq 0} \frac{x_j}{x_0}(1 - \bar{h}_j)\right)}
-      $$
-    </div>
-
-    <p>
-      The system is <strong>implicit</strong>: \( \bar{h}_i \) depends on
-      \( x_0^{\mathrm{slv}} \), which itself depends on all \( \bar{h}_i \).
-      The animation solves this iteratively (toggle <em>Self-consistent</em> on/off
-      to see the difference from the approximate solution).
-    </p>
-
-    <div class="references">
-      <h2>References</h2>
-      <p>Stokes, R. H. &amp; Robinson, R. A. (1948). <em>J. Am. Chem. Soc.</em>, 70, 1870–1878.</p>
-      <p>Zerres, H. &amp; Prausnitz, J. M. (1994). <em>AIChE J.</em>, 40, 676–691.</p>
-      <p>Schönert, H. (1990). <em>J. Solution Chem.</em>, 19, 1197–1211.</p>
-    </div>
-
   </div>
 
 </body>
