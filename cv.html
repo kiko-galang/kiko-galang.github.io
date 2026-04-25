@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV | Francisco Galang</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 820px;
+      margin: 60px auto;
+      padding: 0 24px 80px;
+      color: #222;
+      line-height: 1.7;
+    }
+    a { color: #1a0dab; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { font-size: 0.88em; display: block; margin-bottom: 36px; }
+
+    /* Header */
+    .cv-header { margin-bottom: 36px; border-bottom: 2px solid #222; padding-bottom: 16px; }
+    .cv-header h1 { font-size: 1.9em; margin-bottom: 4px; letter-spacing: 0.02em; }
+    .cv-header .contact { font-size: 0.9em; color: #444; }
+    .cv-header .contact a { color: #444; }
+    .cv-header .contact a:hover { color: #1a0dab; text-decoration: underline; }
+
+    /* Sections */
+    section { margin-top: 36px; }
+    h2 {
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+
+    /* Entry layout */
+    .entry { margin-bottom: 22px; }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .entry-title { font-weight: bold; }
+    .entry-date { font-size: 0.88em; color: #555; white-space: nowrap; }
+    .entry-sub { font-size: 0.92em; color: #444; margin-top: 1px; }
+    .entry-sub em { font-style: italic; }
+    ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+      font-size: 0.93em;
+    }
+    ul li { margin-bottom: 3px; }
+
+    /* Publications */
+    .pub { margin-bottom: 10px; font-size: 0.93em; }
+
+    /* Presentations */
+    .pres { margin-bottom: 8px; font-size: 0.93em; }
+
+    /* Print button */
+    .print-btn {
+      float: right;
+      font-family: Georgia, serif;
+      font-size: 0.85em;
+      padding: 5px 14px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background: #fff;
+      color: #444;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .print-btn:hover { background: #f5f5f5; }
+    @media print { .back, .print-btn { display: none; } }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Back to home</a>
+
+  <div class="cv-header">
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+    <h1>Francisco Javier Galang</h1>
+    <div class="contact">
+      <a href="mailto:kgalang@lbl.gov">kgalang@lbl.gov</a> &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/kikog" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="https://kiko-galang.github.io" target="_blank">kiko-galang.github.io</a>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <section>
+    <h2>Education</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">University of California, Berkeley</span>
+        <span class="entry-date">August 2022 — Present</span>
+      </div>
+      <div class="entry-sub">Ph.D. Candidate, Department of Chemical and Biomolecular Engineering</div>
+      <div class="entry-sub">Research Advisors: Prof. Alexis Bell &amp; Dr. Adam Weber</div>
+      <ul>
+        <li>Certificate in Applied Data Science</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">University of California, Los Angeles</span>
+        <span class="entry-date">September 2018 — June 2022</span>
+      </div>
+      <div class="entry-sub">B.S. Chemical Engineering, <em>Cum Laude</em></div>
+      <div class="entry-sub">Major GPA: 3.9 &nbsp;·&nbsp; Cumulative GPA: 3.8</div>
+    </div>
+  </section>
+
+  <!-- RESEARCH EXPERIENCE -->
+  <section>
+    <h2>Research Experience</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Graduate Student Researcher — Prof. Alexis Bell &amp; Dr. Adam Weber</span>
+        <span class="entry-date">January 2022 — Present</span>
+      </div>
+      <div class="entry-sub">UC Berkeley · Lawrence Berkeley National Laboratory (CIMES &amp; LiSA)</div>
+      <div class="entry-sub" style="margin-top:8px"><em>Developing a Physicochemical Framework for Non-Ideal Thermodynamics and Concentrated Solution Transport in Charged Membranes</em></div>
+      <ul>
+        <li>Implementing a custom macroscopic framework in COMSOL Multiphysics utilizing Concentrated Solution Theory and Non-Ideal Thermodynamics in the Stefan–Maxwell–Onsager formalism to model coupled ion and water transport in ion-exchange membranes.</li>
+      </ul>
+      <div class="entry-sub" style="margin-top:8px"><em>Evaluation of Illumination Direction in Photoelectrochemical Devices for CO₂ Reduction</em></div>
+      <ul>
+        <li>Modelled wet-side and dry-side electrochemical cell designs for CO₂ reduction using COMSOL.</li>
+        <li>Modelled Ag-based semiconductor photocathodes using Python and MIS tunnel diode theory.</li>
+        <li>Compared and evaluated device performance and provided suggestions for future design improvements.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Research Associate — Prof. Chong Liu</span>
+        <span class="entry-date">January 2021 — June 2022</span>
+      </div>
+      <div class="entry-sub">UC Los Angeles, Department of Chemistry and Biochemistry</div>
+      <div class="entry-sub" style="margin-top:8px"><em>Development of Multichannel Potentiostat Platform for Improved Functionality of Electrochemical Equipment</em></div>
+      <ul>
+        <li>UC LEADS supported October 2021 – June 2022.</li>
+        <li>Designed a multichannel potentiostat system in MATLAB for higher experimental throughput.</li>
+        <li>Developed parallel processing code for simultaneous, independent control of multiple electrochemical cells.</li>
+      </ul>
+      <div class="entry-sub" style="margin-top:8px"><em>Cost Analysis and Comparison of Catalytic Systems for Ammonia Generation</em></div>
+      <ul>
+        <li>Calculated experimental costs for 5 different electrochemical catalysts used in ammonia production.</li>
+        <li>Assessed economic feasibility of scaling up large-scale electrochemical ammonia production.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">UC LEADS Research Scholar — Prof. Alexis Bell &amp; Dr. Adam Weber</span>
+        <span class="entry-date">June 2021 — August 2021</span>
+      </div>
+      <div class="entry-sub">UC Berkeley · Lawrence Berkeley National Laboratory (LiSA)</div>
+      <div class="entry-sub" style="margin-top:8px"><em>Design of Cu-Based MIS Photocathodes for Multi-Carbon Product Generation</em></div>
+      <ul>
+        <li>Modelled Cu-based Metal–Insulator–Semiconductor photocathodes using Python and MIS tunnel diode theory.</li>
+        <li>Identified prospective photocathodes enabling C2+ generation from CO₂.</li>
+        <li>Optimized insulator thicknesses to maximize C2+ current densities.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section>
+    <h2>Publications</h2>
+
+    <div class="pub">
+      Bui, J. C., Lees, E. W., Liu, A. K., Toh, W. L., Stovall, T. N., Goyal, P., <strong>Galang, F. J. U.</strong>, Surendranath, Y., Bell, A. T., &amp; Weber, A. Z. Ion-specific phenomena limit energy recovery in forward-biased bipolar membranes. <em>Nature Chemical Engineering.</em> (2025).
+    </div>
+
+    <div class="pub">
+      Gao, T., Schulte, L., Xiao, L., Yamamoto, E., Metlay, A. S., Sheehan, C. J., Marth, S., Park, H., Sasmal, S., <strong>Galang, F. J.</strong>, Bae, C., Weber, A. Z., Boettcher, S. W., &amp; Mallouk, T. E. Bipolar membranes with controlled, microscale 3D junctions enhance the rates of water dissociation and formation. <em>Advanced Energy Materials.</em> (2024).
+    </div>
+  </section>
+
+  <!-- PRESENTATIONS -->
+  <section>
+    <h2>Oral and Poster Presentations</h2>
+
+    <div class="pres">Galang, F. A Unified Multiscale Framework for Non-Ideal Thermodynamics and Concentrated Solution Transport in Charged Membranes. <em>Gordon Research Conference – Electrochemistry.</em> Ventura, CA. 2026.</div>
+
+    <div class="pres">Galang, F. A Unified Multiscale Framework for Non-Ideal Thermodynamics and Concentrated Solution Transport in Charged Membranes. <em>Gordon Research Seminar – Electrochemistry.</em> Ventura, CA. 2026.</div>
+
+    <div class="pres">Galang, F. A Non-Ideal Transport Model of Bipolar Membranes to Understand and Manage Multi-Ion Interactions in Water Electrolysis. <em>AIChE Annual Meeting.</em> San Diego, CA. 2024.</div>
+
+    <div class="pres">Galang, F. A Non-Ideal Transport Model of Bipolar Membranes to Understand and Manage Multi-Ion Interactions in Water Electrolysis. <em>Electrochemical Society.</em> Honolulu, HI. 2024.</div>
+
+    <div class="pres">Galang, F. Evaluation of Illumination Direction in Photoelectrochemical Devices for CO₂ Reduction. <em>Gordon Research Seminar – Solar Fuels.</em> Ventura, CA. 2024.</div>
+
+    <div class="pres">Galang, F. Developing a Multichannel Potentiostat Platform through MATLAB code to Provide Added Functionality to Single Channel Potentiostats. <em>UCLA Undergraduate Research Week.</em> Los Angeles, CA. 2022.</div>
+
+    <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for Multi-Carbon Product Generation. <em>Koret UC Leadership Excellence through Advanced Degrees Symposium.</em> San Diego, CA. 2022.</div>
+
+    <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for CO₂ Reduction to C2+ Products. <em>Annual Biomedical Research Conference for Minority Students.</em> November 2021.</div>
+
+    <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for Multi-Carbon Product Generation. <em>Cal Nerds Summer 2021 Research Showcase.</em> August 2021.</div>
+  </section>
+
+  <!-- AWARDS -->
+  <section>
+    <h2>Awards and Honors</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">UC LEADS Scholar</span>
+        <span class="entry-date">April 2021 — May 2022</span>
+      </div>
+      <div class="entry-sub">University of California Leadership Excellence for Advanced DegreeS Program</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">ABRCMS Poster Presentation Award, Chemistry Category</span>
+        <span class="entry-date">November 2021</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section>
+    <h2>Teaching Activities</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Science and Engineering Volunteer Role Model — Bay Area Scientists in Schools</span>
+        <span class="entry-date">August 2025 — Present</span>
+      </div>
+      <ul>
+        <li>Engage students with hands-on classroom experiments on the Phases of Matter and Electromagnetism.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Graduate Student Instructor — CHMENG 150A Transport Processes</span>
+        <span class="entry-date">January 2025 — May 2025</span>
+      </div>
+      <div class="entry-sub">University of California, Berkeley</div>
+      <ul>
+        <li>Led discussion sections for 111 students in Fluid Mechanics and Heat Transfer.</li>
+        <li>Created, graded, and designed midterm and final examinations.</li>
+        <li>Lectured on Resistor Analogy of Heat Transfer.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Graduate Student Instructor — CHMENG 162 Dynamics and Control</span>
+        <span class="entry-date">August 2023 — December 2023</span>
+      </div>
+      <div class="entry-sub">University of California, Berkeley</div>
+      <ul>
+        <li>Developed lab assignments in MATLAB for 53 students in chemical process dynamics and controls.</li>
+        <li>Created, graded, and designed midterm and final examinations.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Graduate Student Instructor — CHMENG 140 Introduction to Chemical Process Analysis</span>
+        <span class="entry-date">August 2022 — December 2022</span>
+      </div>
+      <div class="entry-sub">University of California, Berkeley</div>
+      <ul>
+        <li>Led discussion sections and review sessions for 119 students in materials and energy balances.</li>
+        <li>Developed, evaluated, and graded homework, exams, and assignments with teaching staff.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">UCLA Learning Assistant — New Learning Assistant Program</span>
+        <span class="entry-date">January 2022 — March 2022</span>
+      </div>
+      <div class="entry-sub">University of California, Los Angeles</div>
+      <ul>
+        <li>Explained engineering heat transfer using pedagogical techniques including wait time, redirecting questions, and fostering collaboration.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL SERVICE -->
+  <section>
+    <h2>Professional Service</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Ph.D. Admission Committee Student Representative — UC Berkeley CBE</span>
+        <span class="entry-date">November 2025 — January 2026</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Panelist on Graduate School Experience — Koret UC LEADS Symposium</span>
+        <span class="entry-date">February 2024</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Mentor — Transfer Student Mentorship Program, UC Berkeley</span>
+        <span class="entry-date">August 2023 — December 2023</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Mentor — AIChE at UCLA Alumni Mentorship Program</span>
+        <span class="entry-date">2023, 2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWING -->
+  <section>
+    <h2>Peer Review</h2>
+    <ul>
+      <li><strong>2025:</strong> ACS Electrochemistry</li>
+      <li><strong>2024:</strong> ACS ES&amp;T Engineering, Applied Energy</li>
+      <li><strong>2023:</strong> Journal of the Electrochemical Society</li>
+    </ul>
+  </section>
+
+  <!-- PHOTOGRAPHY -->
+  <section>
+    <h2>Photography</h2>
+    <ul>
+      <li><strong>2024:</strong> <em>Nature Chemical Engineering</em>, Volume 1 Issue 5, May 2024 — <a href="https://drive.google.com/file/d/13ph-qczBMtJg1iW6hZn0ffEWaHiCxK5R/view?usp=drive_link" target="_blank">Cover Image</a></li>
+    </ul>
+  </section>
+
+</body>
+</html>
