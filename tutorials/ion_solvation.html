@@ -22,9 +22,8 @@
   --an2:   #67e8f9;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;background:var(--bg);font-family:'Syne',sans-serif;color:var(--text);}
-html{height:100%}
-body{display:flex;flex-direction:column;min-height:100%;overflow-x:hidden}
+html,body{width:100%;height:100%;background:var(--bg);font-family:'Syne',sans-serif;color:var(--text);overflow:hidden}
+body{display:flex;flex-direction:column}
 
 /* ── Header ─────────────────────────────────── */
 .hdr{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
@@ -43,7 +42,7 @@ body{display:flex;flex-direction:column;min-height:100%;overflow-x:hidden}
 .sep{width:1px;height:20px;background:var(--brd2);flex-shrink:0}
 
 /* ── Main ────────────────────────────────────── */
-.main{flex:1;min-height:0;display:flex;min-height:500px}
+.main{flex:1;min-height:0;display:flex}
 
 /* ── Animation panel ─────────────────────────── */
 .anim-col{flex-shrink:0;width:330px;display:flex;flex-direction:column;
@@ -92,32 +91,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
 
 /* canvas gauge */
 #cvGauge{display:block}
-
-/* ── Mobile ──────────────────────────────────── */
-@media (max-width: 640px) {
-  .hdr{padding:8px 12px;gap:8px}
-  .hdr-t{font-size:12px}
-  .ion-btn{font-size:8px;padding:2px 7px}
-
-  .main{flex-direction:column;min-height:auto}
-
-  .anim-col{width:100% !important;border-right:none;border-bottom:1px solid var(--brd)}
-  #cvAnim{width:100% !important}
-
-  .charts-col{min-height:460px}
-  .cv-wrap{min-height:230px}
-
-  .info-strip{flex-direction:row;min-height:auto}
-  .gauge-box{flex:0 0 160px;padding:8px 10px}
-  .eq-box{padding:8px 10px}
-  .eq-expr{font-size:8.5px}
-
-  .ctrl-bar{padding:6px 12px;gap:10px}
-  input[type=range]{width:70px}
-
-  .met-bar{padding:4px 12px;gap:4px}
-  .met{font-size:7px;padding:2px 6px}
-}
 </style>
 </head>
 <body>
@@ -927,13 +900,11 @@ function loop(){
   requestAnimationFrame(loop);
   frame++;
 
-  // Sync anim canvas size
-  const panW = cvAnim.parentElement.clientWidth;
-  const panH = cvAnim.parentElement.clientHeight;
-  const tgtW = Math.max(280, panW);
-  const tgtH = Math.max(180, panH - 96);
-  if(cvAnim.height!==tgtH || cvAnim.width!==tgtW){
-    cvAnim.width=tgtW; cvAnim.height=tgtH;
+  // Sync anim canvas height
+  const panH=cvAnim.parentElement.clientHeight;
+  const tgtH=Math.max(180, panH-96);
+  if(cvAnim.height!==tgtH){
+    cvAnim.width=330; cvAnim.height=tgtH;
     initWaters();
   }
 
