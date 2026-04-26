@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -154,5 +154,327 @@
     </p>
   </div>
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ion Solvation | Kiko Galang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    :root {
+      --parchment:  #f4efe4;
+      --parchment2: #ede6d6;
+      --ink:        #2a1f0e;
+      --ink-muted:  #6b5c45;
+      --ink-faint:  #a8977e;
+      --teal:       #3d7068;
+      --teal-light: #5a9189;
+      --teal-pale:  #c8ddd8;
+      --gold:       #b5862a;
+      --rule:       #c9bba2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.8;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px;
+      z-index: 9999;
+    }
+
+    .wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 28px 100px;
+    }
+
+    /* ── Back link ── */
+    .back {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 36px;
+      transition: color .15s;
+    }
+    .back:hover { color: var(--teal); }
+
+    /* ── Page header ── */
+    .page-header { margin-bottom: 40px; }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.7em, 4vw, 2.3em);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* ── Section headers ── */
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15em;
+      font-weight: normal;
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 6px;
+      margin: 44px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1em;
+      font-weight: normal;
+      font-style: italic;
+      color: var(--ink-muted);
+      margin: 32px 0 12px;
+    }
+
+    p {
+      font-size: 0.97em;
+      color: var(--ink-muted);
+      margin-bottom: 1em;
+      max-width: 640px;
+    }
+    p strong { color: var(--ink); font-weight: 600; }
+    p em { font-style: italic; }
+
+    /* ── Animation container — the dark window ── */
+    .anim-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .anim-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .animation-container {
+      width: 100%;
+      border-top: 2px solid var(--teal);
+      border-bottom: 2px solid var(--teal);
+      margin: 8px 0 40px;
+      background: #04070e;
+    }
+    .animation-container iframe {
+      width: 100%;
+      height: 520px;
+      border: none;
+      display: block;
+    }
+
+    /* ── Equation blocks ── */
+    .equation-block {
+      background: var(--parchment2);
+      border-left: 3px solid var(--teal);
+      padding: 14px 22px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+      overflow-x: auto;
+    }
+
+    /* ── References ── */
+    .references {
+      margin-top: 64px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .references h2 { font-size: 1em; margin-top: 0; }
+    .references p {
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: .04em;
+      line-height: 1.9;
+      color: var(--ink-faint);
+      margin-bottom: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--ink-faint); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <a class="back" href="../index.html">← Back to home</a>
+
+  <div class="page-header">
+    <h1>Ion Solvation in<br>Concentrated Electrolytes</h1>
+    <p class="page-subtitle">Interactive Tutorial · Stokes–Robinson / Zerres–Prausnitz</p>
+  </div>
+
+  <h2>Interactive Animation</h2>
+  <p>
+    The animation below shows how solvent molecules partition between free bulk solvent
+    and bound hydration shells as ion concentration increases. Use the controls to
+    explore how the binding constant \( k_i \) and number of sites \( \mathcal{N}_i \)
+    affect the free solvent fraction.
+  </p>
+
+  <div class="anim-label">[ interactive · ion–solvent binding ]</div>
+  <div class="animation-container">
+    <iframe src="ion_solvation.html" title="Ion solvation animation"></iframe>
+  </div>
+
+  <h2>Theory</h2>
+
+  <p>
+    In concentrated solutions, accounting for solvation is necessary. Solvation adjusts
+    the entropy of mixing because a non-trivial fraction of solvent molecules is removed
+    from the free bulk pool when they form ion hydration shells. Ideal mixing assumes all
+    solvent molecules contribute to the mixing entropy; solvation relaxes this assumption
+    by distinguishing bound vs. unbound solvent and solvated vs. unsolvated ions.
+  </p>
+
+  <p>
+    This process is modeled as a series of binding equilibria governed by a microscopic
+    solvent–ion binding constant \( k_i \) and a maximum number of available sites
+    \( \mathcal{N}_i \) on the ion. The contribution of solvation to non-ideality is
+    expressed through the excess Gibbs free energy:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \frac{\Delta G^{\mathrm{slv}}}{RT}
+    = n_0 \ln \alpha_0
+    + \sum_{i \neq 0} n_i \ln\!\left(\frac{\alpha_i}{\alpha_i^{\infty}}\right)
+    $$
+  </div>
+
+  <p>
+    Here \( x_0 \) and \( x_i \) are the overall mole fractions of solvent and ion \( i \),
+    while \( x_0^{\mathrm{slv}} \) and \( x_i^{\mathrm{slv}} \) are the mole fractions of
+    the <em>free</em> (unbound) solvent and <em>unsolvated</em> ions.
+  </p>
+
+  <h3>Correction Factors</h3>
+
+  <p>
+    The <strong>solvent correction</strong> \( \alpha_0 = x_0^{\mathrm{slv}} / x_0 \)
+    accounts for depletion of free solvent into hydration shells:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \alpha_0 = \gamma_0^{\mathrm{slv}}
+    = \frac{x_0^{\mathrm{slv}}}{x_0}
+    = \frac{1 - \displaystyle\sum_i \bar{h}_i \frac{x_i}{x_0}}
+           {x_0 + \displaystyle\sum_i x_i (1 - \bar{h}_i)}
+    $$
+  </div>
+
+  <p>
+    The <strong>solute correction</strong> \( \alpha_i = x_i^{\mathrm{slv}} / x_i \)
+    accounts for the fraction of ions remaining unbound at equilibrium. Normalized to
+    its infinite-dilution value \( \alpha_i^\infty \), it gives the solvation activity
+    coefficient:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \gamma_i^{\mathrm{slv}} = \frac{\alpha_i}{\alpha_i^{\infty}}
+    = \frac{(1 + k_i)^{N_i}}
+           {x_0 \bigl(1 + k_i x_0\bigr)^{N_i}
+           \left(1 + \displaystyle\sum_{j \neq 0} \frac{x_j}{x_0}(1 - \bar{h}_j)\right)}
+    $$
+  </div>
+
+  <p>
+    The average number of solvent molecules bound to ion \( i \) follows a
+    Langmuir-type saturation expression:
+  </p>
+
+  <div class="equation-block">
+    $$
+    \bar{h}_i = \frac{N_i k_i x_0^{\mathrm{slv}}}{1 + k_i x_0^{\mathrm{slv}}}
+    $$
+  </div>
+
+  <p>
+    The system is <strong>implicit</strong>: \( \bar{h}_i \) depends on the free solvent
+    fraction \( x_0^{\mathrm{slv}} \), which itself depends on all \( \bar{h}_i \).
+    Toggle <em>Self-consistent</em> in the animation to see the difference from the
+    approximate solution.
+  </p>
+
+  <div class="references">
+    <h2>References</h2>
+    <p>
+      Stokes, R. H. &amp; Robinson, R. A. (1948). <em>J. Am. Chem. Soc.</em>, 70, 1870–1878.<br>
+      Zerres, H. &amp; Prausnitz, J. M. (1994). <em>AIChE J.</em>, 40, 676–691.<br>
+      Schönert, H. (1990). <em>J. Solution Chem.</em>, 19, 1197–1211.
+    </p>
+  </div>
+
+  <footer>
+    <span><a href="../index.html">Kiko Galang</a> · Tutorials</span>
+    <span><a href="../index.html">← Back to home</a></span>
+  </footer>
+
+</div>
 </body>
 </html>
