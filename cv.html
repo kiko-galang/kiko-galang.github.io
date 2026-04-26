@@ -4,93 +4,246 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV | Francisco Galang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --parchment:  #f4efe4;
+      --parchment2: #ede6d6;
+      --ink:        #2a1f0e;
+      --ink-muted:  #6b5c45;
+      --ink-faint:  #a8977e;
+      --teal:       #3d7068;
+      --teal-light: #5a9189;
+      --teal-pale:  #c8ddd8;
+      --gold:       #b5862a;
+      --rule:       #c9bba2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Georgia, serif;
-      max-width: 820px;
-      margin: 60px auto;
-      padding: 0 24px 80px;
-      color: #222;
-      line-height: 1.7;
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.75;
     }
-    a { color: #1a0dab; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back { font-size: 0.88em; display: block; margin-bottom: 36px; }
 
-    /* Header */
-    .cv-header { margin-bottom: 36px; border-bottom: 2px solid #222; padding-bottom: 16px; }
-    .cv-header h1 { font-size: 1.9em; margin-bottom: 4px; letter-spacing: 0.02em; }
-    .cv-header .contact { font-size: 0.9em; color: #444; }
-    .cv-header .contact a { color: #444; }
-    .cv-header .contact a:hover { color: #1a0dab; text-decoration: underline; }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px;
+      z-index: 9999;
+    }
 
-    /* Sections */
-    section { margin-top: 36px; }
-    h2 {
-      font-size: 1em;
+    .wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 28px 100px;
+    }
+
+    /* ── Back link ── */
+    .back {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 4px;
-      margin-bottom: 18px;
+      color: var(--ink-faint);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 36px;
+      transition: color .15s;
+    }
+    .back:hover { color: var(--teal); }
+
+    /* ── CV Header ── */
+    .cv-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 20px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* Entry layout */
-    .entry { margin-bottom: 22px; }
+    .cv-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8em, 4vw, 2.4em);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .cv-header h1 em { font-style: italic; color: var(--teal); }
+
+    .contact {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--ink-muted);
+      line-height: 2;
+    }
+    .contact a { color: var(--ink-muted); text-decoration: none; transition: color .15s; }
+    .contact a:hover { color: var(--teal); }
+
+    .print-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .print-btn:hover { background: var(--parchment2); color: var(--teal); border-color: var(--teal); }
+    @media print {
+      .back, .print-btn, body::before { display: none; }
+      body { background: white; }
+      .wrapper { padding: 20px; }
+    }
+
+    /* ── Section headers ── */
+    section { margin-top: 36px; }
+
+    h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 5px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h2 a {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .08em;
+      text-transform: none;
+      color: var(--ink-faint);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color .15s;
+    }
+    h2 a:hover { color: var(--teal); }
+
+    /* ── Entries ── */
+    .entry { margin-bottom: 24px; }
+
     .entry-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
       gap: 4px;
+      margin-bottom: 2px;
     }
-    .entry-title { font-weight: bold; }
-    .entry-date { font-size: 0.88em; color: #555; white-space: nowrap; }
-    .entry-sub { font-size: 0.92em; color: #444; margin-top: 1px; }
-    .entry-sub em { font-style: italic; }
+
+    .entry-title {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 0.95em;
+      color: var(--ink);
+    }
+
+    .entry-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .06em;
+      color: var(--ink-faint);
+      white-space: nowrap;
+    }
+
+    .entry-sub {
+      font-family: 'Lora', serif;
+      font-size: 0.88em;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+    .entry-sub em { font-style: italic; color: var(--ink-muted); }
+
     ul {
       margin: 6px 0 0 18px;
       padding: 0;
-      font-size: 0.93em;
     }
-    ul li { margin-bottom: 3px; }
-
-    /* Publications */
-    .pub { margin-bottom: 10px; font-size: 0.93em; }
-
-    /* Presentations */
-    .pres { margin-bottom: 8px; font-size: 0.93em; }
-
-    /* Print button */
-    .print-btn {
-      float: right;
-      font-family: Georgia, serif;
-      font-size: 0.85em;
-      padding: 5px 14px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      background: #fff;
-      color: #444;
-      cursor: pointer;
-      margin-top: 4px;
+    ul li {
+      font-size: 0.88em;
+      color: var(--ink-muted);
+      margin-bottom: 3px;
     }
-    .print-btn:hover { background: #f5f5f5; }
-    @media print { .back, .print-btn { display: none; } }
+
+    /* ── Publications ── */
+    .pub {
+      font-size: 0.9em;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+      padding-left: 14px;
+      border-left: 2px solid var(--teal-pale);
+      line-height: 1.7;
+    }
+    .pub strong { color: var(--ink); }
+    .pub em { font-style: italic; }
+
+    /* ── Presentations ── */
+    .pres {
+      font-size: 0.88em;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--rule);
+      line-height: 1.65;
+    }
+    .pres:last-child { border-bottom: none; }
+    .pres em { font-style: italic; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--ink-faint); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
   </style>
 </head>
 <body>
+<div class="wrapper">
 
   <a class="back" href="index.html">← Back to home</a>
 
   <div class="cv-header">
-    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
-    <h1>Francisco Javier Galang</h1>
-    <div class="contact">
-      <a href="mailto:kgalang@lbl.gov">kgalang@lbl.gov</a> &nbsp;·&nbsp;
-      <a href="https://www.linkedin.com/in/kikog" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
-      <a href="https://kiko-galang.github.io" target="_blank">kiko-galang.github.io</a>&nbsp;·&nbsp;
-      <a href="https://kgalang.myportfolio.com" target="_blank">Photography Portfolio</a>
+    <div>
+      <h1>Francisco Javier Galang<br><em>Kiko</em></h1>
+      <div class="contact">
+        <a href="mailto:kgalang@lbl.gov">kgalang@lbl.gov</a> &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/kikog" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+        <a href="https://kiko-galang.github.io" target="_blank">kiko-galang.github.io</a>&nbsp;·&nbsp;
+        <a href="https://kgalang.myportfolio.com" target="_blank">Photography Portfolio</a>
+
+      </div>
     </div>
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
   </div>
 
   <!-- EDUCATION -->
@@ -104,9 +257,7 @@
       </div>
       <div class="entry-sub">Ph.D. Candidate, Department of Chemical and Biomolecular Engineering</div>
       <div class="entry-sub">Research Advisors: Prof. Alexis Bell &amp; Dr. Adam Weber</div>
-      <ul>
-        <li>Certificate in Applied Data Science</li>
-      </ul>
+      <ul><li>Certificate in Applied Data Science</li></ul>
     </div>
 
     <div class="entry">
@@ -119,7 +270,7 @@
     </div>
   </section>
 
-  <!-- RESEARCH EXPERIENCE -->
+  <!-- RESEARCH -->
   <section>
     <h2>Research Experience</h2>
 
@@ -193,21 +344,13 @@
     <h2>Oral and Poster Presentations</h2>
 
     <div class="pres">Galang, F. A Unified Multiscale Framework for Non-Ideal Thermodynamics and Concentrated Solution Transport in Charged Membranes. <em>Gordon Research Conference – Electrochemistry.</em> Ventura, CA. 2026.</div>
-
     <div class="pres">Galang, F. A Unified Multiscale Framework for Non-Ideal Thermodynamics and Concentrated Solution Transport in Charged Membranes. <em>Gordon Research Seminar – Electrochemistry.</em> Ventura, CA. 2026.</div>
-
     <div class="pres">Galang, F. A Non-Ideal Transport Model of Bipolar Membranes to Understand and Manage Multi-Ion Interactions in Water Electrolysis. <em>AIChE Annual Meeting.</em> San Diego, CA. 2024.</div>
-
     <div class="pres">Galang, F. A Non-Ideal Transport Model of Bipolar Membranes to Understand and Manage Multi-Ion Interactions in Water Electrolysis. <em>Electrochemical Society.</em> Honolulu, HI. 2024.</div>
-
     <div class="pres">Galang, F. Evaluation of Illumination Direction in Photoelectrochemical Devices for CO₂ Reduction. <em>Gordon Research Seminar – Solar Fuels.</em> Ventura, CA. 2024.</div>
-
     <div class="pres">Galang, F. Developing a Multichannel Potentiostat Platform through MATLAB code to Provide Added Functionality to Single Channel Potentiostats. <em>UCLA Undergraduate Research Week.</em> Los Angeles, CA. 2022.</div>
-
     <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for Multi-Carbon Product Generation. <em>Koret UC Leadership Excellence through Advanced Degrees Symposium.</em> San Diego, CA. 2022.</div>
-
     <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for CO₂ Reduction to C2+ Products. <em>Annual Biomedical Research Conference for Minority Students.</em> November 2021.</div>
-
     <div class="pres">Galang, F. Design of Cu-Based MIS Photocathodes for Multi-Carbon Product Generation. <em>Cal Nerds Summer 2021 Research Showcase.</em> August 2021.</div>
   </section>
 
@@ -233,16 +376,16 @@
 
   <!-- TEACHING -->
   <section>
-    <h2>Teaching Activities &nbsp;<a href="https://drive.google.com/file/d/13ph-qczBMtJg1iW6hZn0ffEWaHiCxK5R/view?usp=sharing" target="_blank" style="font-size:0.8em;font-weight:normal;text-transform:none;letter-spacing:0">Student Testimonials ↗</a></h2>
+    <h2>Teaching Activities
+      <a href="https://drive.google.com/file/d/13ph-qczBMtJg1iW6hZn0ffEWaHiCxK5R/view?usp=sharing" target="_blank">Student Testimonials ↗</a>
+    </h2>
 
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Science and Engineering Volunteer Role Model — Bay Area Scientists in Schools</span>
         <span class="entry-date">August 2025 — Present</span>
       </div>
-      <ul>
-        <li>Engage students with hands-on classroom experiments on the Phases of Matter and Electromagnetism.</li>
-      </ul>
+      <ul><li>Engage students with hands-on classroom experiments on the Phases of Matter and Electromagnetism.</li></ul>
     </div>
 
     <div class="entry">
@@ -288,9 +431,7 @@
         <span class="entry-date">January 2022 — March 2022</span>
       </div>
       <div class="entry-sub">University of California, Los Angeles</div>
-      <ul>
-        <li>Explained engineering heat transfer using pedagogical techniques including wait time, redirecting questions, and fostering collaboration.</li>
-      </ul>
+      <ul><li>Explained engineering heat transfer using pedagogical techniques including wait time, redirecting questions, and fostering collaboration.</li></ul>
     </div>
   </section>
 
@@ -327,7 +468,7 @@
     </div>
   </section>
 
-  <!-- REVIEWING -->
+  <!-- PEER REVIEW -->
   <section>
     <h2>Peer Review</h2>
     <ul>
@@ -339,11 +480,19 @@
 
   <!-- PHOTOGRAPHY -->
   <section>
-    <h2><a href="https://kgalang.myportfolio.com/" target="_blank" style="color:#222;text-decoration:none;">Photography ↗</a></h2>
+    <h2><a href="https://kgalang.myportfolio.com/" target="_blank" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);border:none;">Photography ↗</a></h2>
     <ul>
-      <li><strong>2024:</strong> <em>Nature Chemical Engineering</em>, Volume 1 Issue 5, May 2024 — <a href="https://kgalang.myportfolio.com/published-1" target="_blank">Cover Image</a></li>
+      <li><strong>2024:</strong> <em>Nature Chemical Engineering</em>, Volume 1 Issue 5, May 2024 —
+        <a href="https://kgalang.myportfolio.com/published-1" target="_blank" style="color:var(--teal);font-family:'Space Mono',monospace;font-size:0.85em;">Cover Image ↗</a>
+      </li>
     </ul>
   </section>
 
+  <footer>
+    <span>Francisco Javier Galang · UC Berkeley</span>
+    <span><a href="index.html">← Back to home</a></span>
+  </footer>
+
+</div>
 </body>
 </html>
