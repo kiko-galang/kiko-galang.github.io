@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -78,5 +78,284 @@
     <p>I bake cookies weekly for friends and family. <a href="baking.html">See the gallery →</a></p>
   </section>
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiko Galang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment:  #f4efe4;
+      --parchment2: #ede6d6;
+      --ink:        #2a1f0e;
+      --ink-muted:  #6b5c45;
+      --ink-faint:  #a8977e;
+      --teal:       #3d7068;
+      --teal-light: #5a9189;
+      --teal-pale:  #c8ddd8;
+      --gold:       #b5862a;
+      --rule:       #c9bba2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px;
+      z-index: 9999;
+    }
+
+    .wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 28px 100px;
+    }
+
+    /* ── Header ── */
+    .site-header { margin-bottom: 48px; }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2em, 5vw, 2.8em);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    h1 em { font-style: italic; color: var(--teal); }
+
+    .subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 12px 0;
+    }
+    nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      margin-right: 24px;
+      transition: color .15s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    /* ── Sections ── */
+    section { margin-top: 48px; }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25em;
+      font-weight: normal;
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+    h2 a { color: var(--ink); text-decoration: none; transition: color .15s; }
+    h2 a:hover { color: var(--teal); }
+
+    p { font-size: 0.97em; color: var(--ink-muted); max-width: 600px; }
+
+    .text-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-pale);
+      transition: border-color .15s, color .15s;
+    }
+    .text-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── Tutorial list ── */
+    .tutorial-list { list-style: none; margin-top: 12px; }
+    .tutorial-list li {
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--rule);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .tutorial-list li:last-child { border-bottom: none; }
+    .tutorial-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      border: 1px solid var(--teal-pale);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tutorial-list a {
+      font-family: 'Lora', serif;
+      font-size: 0.95em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .15s, color .15s;
+    }
+    .tutorial-list a:hover { color: var(--teal); border-bottom-color: var(--teal-pale); }
+
+    .soon {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      border: 1px dashed var(--rule);
+      padding: 2px 8px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--ink-faint); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="site-header">
+    <h1>Francisco Javier Galang<br><em>Kiko</em></h1>
+    <p class="subtitle">PhD Candidate · Chemical Engineering · UC Berkeley</p>
+    <nav>
+      <a href="#research">Research</a>
+      <a href="tutorials/solvation.html">Tutorials</a>
+      <a href="cv.html">CV</a>
+      <a href="#blog">Blog</a>
+      <a href="#photography">Photography</a>
+      <a href="baking.html">Baking</a>
+      <a href="mailto:kgalang@lbl.gov">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I'm a fourth-year PhD student at UC Berkeley advised by Adam Weber and Alex Bell
+      at Lawrence Berkeley National Laboratory. My research develops concentrated solution
+      theory frameworks for ion transport in ion-exchange membranes, sitting at the
+      intersection of transport phenomena, molecular thermodynamics, and polymer physics.
+    </p>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <p>
+      My thesis focuses on generalizing concentrated solution theory to anion exchange
+      membranes, with applications to electrolyzers and fuel cells.
+    </p>
+    <span class="soon">Full page coming soon</span>
+  </section>
+
+  <section id="tutorials">
+    <h2><a href="tutorials/solvation.html">Tutorials</a></h2>
+    <p>Interactive pedagogical pages on electrochemical engineering — derivations alongside animations.</p>
+    <ul class="tutorial-list">
+      <li>
+        <span class="tutorial-tag">Thermodynamics</span>
+        <a href="tutorials/solvation.html">Ion Solvation in Concentrated Electrolytes</a>
+      </li>
+    </ul>
+  </section>
+
+  <section id="cv">
+    <h2><a href="cv.html">CV</a></h2>
+    <p>Publications, teaching, awards, and service.</p>
+    <br>
+    <a class="text-link" href="cv.html">View full CV →</a>
+  </section>
+
+  <section id="blog">
+    <h2>Blog</h2>
+    <p>Thoughts on research, grad school, and whatever else is on my mind.</p>
+    <span class="soon">Coming soon</span>
+  </section>
+
+  <section id="photography">
+    <h2>Photography</h2>
+    <p>
+      My photography was featured on the cover of
+      <em>Nature Chemical Engineering</em>, Volume 1 Issue 5 (May 2024).
+    </p>
+    <br>
+    <a class="text-link" href="https://kgalang.myportfolio.com/" target="_blank">See portfolio →</a>
+  </section>
+
+  <section id="baking">
+    <h2><a href="baking.html">Baking</a></h2>
+    <p>I bake cookies weekly for friends and my church community.</p>
+    <br>
+    <a class="text-link" href="baking.html">See the gallery →</a>
+  </section>
+
+  <footer>
+    <span>Kiko Galang · UC Berkeley</span>
+    <span><a href="mailto:kgalang@lbl.gov">kgalang@lbl.gov</a></span>
+  </footer>
+
+</div>
 </body>
 </html>
