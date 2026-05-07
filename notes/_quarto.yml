@@ -15,8 +15,10 @@ website:
 format:
   html:
     theme: cosmo
+    css: custom.css
     mainfont: Georgia
     monofont: "Space Mono"
     toc: true
     toc-depth: 3
     html-math-method: mathjax
+    google-fonts: "Space Mono"

@@ -29,8 +29,8 @@ $$
 ## Interactive Animation For Solvation
 
 ::: {.column-screen-inset}
-<iframe src="../tutorials/ion_solvation.html" 
-        height="520px" width="100%" 
-        frameborder="0">
+<iframe class="anim-frame" 
+        src="../tutorials/ion_solvation.html"
+        title="Ion Solvation Animation">
 </iframe>
 :::
