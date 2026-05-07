@@ -28,6 +28,555 @@ $$
 
 ## Interactive Animation For Solvation
 
+\discussion{Part 1: Derivation of the Average Solvation number}
+\paragraph{Motivation}
+Solvation free energy reflects the cost of surrounding a charged species with a shell of oriented solvent molecules. This means the the entropy decrease due to free solvent molecules binding to unsolvated ions and limiting the configurations that can be accessed. In this work, we follow a thermodynamic route to relate average solvation number and binding equilibria to chemical potentials and activity coefficients. This approach naturally bridges molecular-scale solvation with macroscopic observables and connects to models such as the Stokes-Robinson hydration framework utilized by crothers.
+
+\subsection*{Step 1: Foundational Definitions and Mass Balances}
+In this work, we derive an expression for the average solvation number that incorporates both microscopic and macroscopic equilibrium constants. Our final goal is to express activity coefficients in terms of fundamental solvation parameters.
+
+\subsubsection*{The Average Solvation Number}
+We define the average solvation number (number of bound solvent molecules per cation) as:
+\begin{equation}
+\bar{h} = \frac{\text{total number of bound solvent molecules}}{\text{total number of cations}} = \frac{n_{\text{H}_2\text{O}}^b}{n_C^t}
+\end{equation}
+where:
+\begin{itemize}
+    \item \( n_{\text{H}_2\text{O}}^b \): total number of \textbf{bound} water (solvent) molecules
+    \item \( n_C^t \): total number of cations (superscript \( t \) indicates \textbf{total})
+\end{itemize}
+
+\subsubsection*{Mass Balance of Species}
+We define:
+\begin{itemize}
+    \item \( n_{\text{H}_2\text{O}}^t \): total number of water molecules
+    \item \( n_{\text{H}_2\text{O}}^f \): number of \textbf{free} water molecules (not bound to a cation)
+    \item \( n_{C_i} \): number of cations with \( i \) bound water molecules
+    \item \( N \): maximum number of possible solvation sites per cation
+\end{itemize}
+From a mass balance:
+\begin{equation*}
+    n_{\text{H}_2\text{O}}^t = n_{\text{H}_2\text{O}}^f + \sum_{i=0}^N i n_{C_i}
+\end{equation*}
+\begin{equation*}
+    n_{\text{H}_2\text{O}}^b = n_{\text{H}_2\text{O}}^t - n_{\text{H}_2\text{O}}^f = \sum_{i=0}^N i n_{C_i}
+\end{equation*}
+\begin{equation*}
+    n_C^t = \sum_{i=0}^N n_{C_i}
+\end{equation*}
+Thus,
+\begin{equation}
+    \bar{h} = \frac{\sum_{i=0}^N i n_{C_i}}{\sum_{i=0}^N n_{C_i}} = \frac{\sum_{i=0}^N i x_i}{\sum_{i=0}^N x_i}
+\end{equation}
+where \( x_i = n_{C_i} / n_C^t \) is the mole fraction of cations with \( i \) bound water molecules.
+
+\subsection*{Step 2: Microscopic and Macroscopic Equilibria}
+We now draw analogies from ligand-binding models, distinguishing between macroscopic and microscopic equilibrium constants.
+\subsubsection*{2a. Distinguishing Equilibrium Constants ($k$ vs $K$)}
+It is crucial to distinguish between the macroscopic constant $K_i$, which describes the overall formation of a species with i bound molecules, and the microscopic constant $k$, which describes the intrinsic affinity for any single, specific binding site. The macroscopic constants are influenced by combinatorics, while the microscopic constant is not.\\
+The macroscopic equilibrium constant \( K_1 \) relates to all species with one bound solvent molecule regardless of which site is occupied:
+\begin{equation*}
+    K_1 = \frac{[C_1]}{[C_0][\text{H}_2\text{O}]}
+\end{equation*}
+This includes the sum of all microstates with one solvent bound.\\
+\textbf{Macroscopic Equilibria Example:}
+\begin{align*}
+    BH_2^+ &\rightleftharpoons BH + H^+ \quad (K_1) \\
+    BH &\rightleftharpoons B^- + H^+ \quad (K_2)
+\end{align*}
+In contrast, microscopic equilibrium constants \( k_i \) refer to binding at specific individual sites:
+\begin{equation*}
+    C_0 + \text{H}_2\text{O} \rightleftharpoons C_1 \quad \text{via specific microstate with rate constant } k
+\end{equation*}
+\textit{k represents equilibrium with a single, specific microscopic species.}\\
+\textbf{Microscopic Equilibria Example:}
+\begin{align*}
+    H-B-H^+ &\rightleftharpoons H-B + H^+ \quad (k_1) \\
+    H-B-H^+ &\rightleftharpoons B-H + H^+ \quad (k_2) \\
+    H-B &\rightleftharpoons B^- + H^+ \quad (k_3)
+\end{align*}
+
+The macroscopic constants relate to populations summed over indistinguishable microstates. In contrast, microscopic constants describe specific binding site interactions.
+
+\subsubsection*{2b. Combinatorics of Binding Sites}
+To relate macroscopic and microscopic quantities, we consider the number of configurations (microstates) for binding \( i \) solvent molecules to \( n \) identical sites. For cations with \( n \) identical binding sites and \( i \) bound waters, the number of unique microstates is can be written out by the full factorial product.
+
+\begin{equation*}
+    \Omega_{n,i} = \frac{n (n - 1)(n - 2) \cdots (n - i + 1)}{i!}
+\end{equation*}
+This can be simplified to the binomial form:
+\begin{equation}
+    \Omega_{n,i} = \binom{n}{i} = \frac{n!}{i!(n - i)!}
+\end{equation}
+
+\textit{For model simplicity, we assume that all sites bind identically, meaning \( k_i = k_j \), though \( K_i \ne K_j \) due to the combinatorics.}
+
+\subsection*{Step 3: Deriving a Closed-Form Expression for $\bar{h}$}
+Define equilibrium constants based on activities:
+\begin{align*}
+    K_1 &= \frac{a_1}{a_0 a_w} \Rightarrow a_1 = K_1 a_0 a_w \\
+    K_2 &= \frac{a_2}{a_1 a_w} \\
+    \Rightarrow a_2 &= K_2 a_1 a_w = a_0 a_w^2 K_1 K_2
+\end{align*}
+In general:
+\begin{equation*}
+    K_i = \frac{a_i}{a_{i-1} a_w} \Rightarrow a_i = a_0 a_w^i \prod_{j=1}^i K_j
+\end{equation*}
+Assuming activity \( a_i \approx x_i \), we have:
+\begin{equation*}
+    x_i = x_0 x_w^i \prod_{j=1}^i K_j
+\end{equation*}
+
+This sets the stage for expressing \( \bar{h} \) as a function of \( x_w \), \( k \), and \( n \), which we will explore on the next page.
+
+\subsubsection*{3a. Relating Macroscopic and Microscopic Constants}
+Now, consider the general equilibrium:
+\begin{equation*}
+    C_{i-1} + \text{H}_2\text{O} \rightleftharpoons C_i
+\end{equation*}
+
+Each macrostate \( C_i \) represents a collection of microstates that differ by which binding sites are occupied. To express the equilibrium in terms of microscopic constants, we normalize the concentrations by the number of corresponding microstates:
+\begin{equation*}
+    k = \frac{\left( \frac{[C_i]}{\Omega_{n,i}} \right)}{\left( \frac{[C_{i-1}]}{\Omega_{n,i-1}} \right)[\text{H}_2\text{O}]}
+\end{equation*}
+This ensures the microscopic constant \( k \) refers to the equilibrium for a \emph{single, distinguishable} binding configuration.
+
+Rewriting, we obtain the macroscopic constant:
+\begin{equation*}
+    K_i = \frac{[C_i]}{[C_{i-1}][\text{H}_2\text{O}]} = \frac{\Omega_{n,i}}{\Omega_{n,i-1}} k
+\end{equation*}
+Using the binomial forms:
+\begin{align*}
+    \frac{\Omega_{n,i}}{\Omega_{n,i-1}} &= \frac{\frac{n!}{i!(n - i)!}}{\frac{n!}{(i - 1)!(n - i + 1)!}} \\
+    &= \frac{(i - 1)! (n - i + 1)!}{i! (n - i)!} \\
+    &= \frac{n - i + 1}{i}
+\end{align*}
+Thus,
+\begin{equation}
+    K_i = \frac{n - i + 1}{i} k
+\end{equation}
+
+\subsubsection*{3b. Deriving the Mole Fractions}
+% We now use this relationship to express the mole fractions \( x_i \) recursively:
+\begin{align*}
+    \prod_{j=1}^i K_j &= \prod_{j=1}^i \left( \frac{n - j + 1}{j} \right) k^i \\
+    % &= \frac{n!}{(n - i)! i!} k^i = \binom{n}{i} k^i
+\end{align*}
+We can rewrite the previous equation
+
+\begin{equation*}
+x_i \ = x_0 x_w^i \prod_{j=1}^i K_j= x_0 x_w^i \prod_{j=1}^{i} \frac{n-i+1}{i} k^i
+\end{equation*}
+
+We can say that
+
+\begin{equation*}
+\prod_{j=1}^{i} \frac{n-i+1}{i} =\frac{n!}{(n-i)! i!}
+\end{equation*}
+
+\begin{equation*}
+x_i = x_0 (k x_w)^i \frac{n!}{(n-i)! i!}
+\end{equation*}
+
+Plugging into our original definition of the Solvation number
+
+\begin{equation*}
+\bar{h} = \frac{\sum_{i=0}^{N} i x_i}{\sum_{i=0}^{N} x_i} = \frac{\sum_{i=0}^{N} i x_0 (k x_w)^i \frac{n!}{(n-i)! i!}}{\sum_{i=0}^{N} x_0 (k x_w)^i \frac{n!}{(n-i)! i!}}
+\end{equation*}
+
+We factor out the constant \(x_0\)
+
+\begin{equation*}
+\bar{h} = \frac{\cancel{x_0} \sum_{i=0}^{N} i (k x_w)^i \frac{n!}{(n-i)! i!}}{\cancel{x_0} \sum_{i=0}^{N} (k x_w)^i \frac{n!}{(n-i)! i!}}
+\end{equation*}
+
+This prepares us for evaluating the sums using binomial identities, which will follow in the next section.
+
+\subsubsection*{3c. Evaluating the Binomial Sums}
+We can find a closed-form solution for  
+$h$ by recognizing that the numerator and denominator are related to the binomial theorem and its derivative.
+Recall the binomial identity:
+\begin{equation*}
+    \sum_{i=0}^n \binom{n}{i} x^i = (1 + x)^n
+\end{equation*}
+and its derivative with respect to \( x \):
+\begin{equation*}
+    \sum_{i=0}^n i \binom{n}{i} x^{i-1} = n(1 + x)^{n-1}
+\end{equation*}
+Multiplying both sides by \( x \):
+\begin{equation*}
+    \sum_{i=0}^n i \binom{n}{i} x^i = n x (1 + x)^{n - 1}
+\end{equation*}
+
+Now apply this to our Solvation expression. Let \( y = k x_w \):
+\begin{align*}
+    \overline{h} &= \frac{\sum_{i=0}^{N} i y^i \binom{N}{i}}{\sum_{i=0}^{N} y^i \binom{N}{i}} \\
+    &= \frac{N y (1 + y)^{N - 1}}{(1 + y)^N} \\
+    &= \frac{N y}{1 + y}
+\end{align*}
+
+Substituting back in for \( y = k x_w \), we obtain the closed-form result:
+\begin{equation}
+    \boxed{\bar{h} = \frac{N k x_w}{1 + k x_w}}
+\end{equation}
+
+This compact expression links the average number of bound solvent molecules per cation to the microscopic binding constant \( k \), the number of solvation sites \( N\), and the free water mole fraction \( x_w \).
+
+\discussion{Part II: Derivation of the Solvation Activity Coefficient}
+\paragraph{Motivation}
+Having established a molecular model for the average solvation number, the next step is to quantify its effect on the system's thermodynamics. The binding of solvent molecules to ions depletes the amount of "free" solvent available for mixing, which alters the chemical potential of all species in the solution. This section connects the microscopic solvation model to the macroscopic activity coefficients by first defining the excess Gibbs free energy of solvation and then deriving expressions for the activity coefficients of both solvating and non-solvating species.\\
+\subsection*{Step 4. Connecting Solvation to Gibbs Free Energy}
+First, assume the complete dissociation of electrolyte in cations C and anions A.
+
+\begin{equation*}
+E \rightarrow \nu_C C + \nu_A A
+\end{equation*}
+
+$\nu$ are stoichiometric coefficients
+
+The chemical potential of the electrolyte is connected to those of the ions by
+
+\begin{equation*}
+\mu_E = \nu_C \mu_C + \nu_A \mu_A
+\end{equation*}
+
+We say that the chemical potential of the ions are expressed in the following way
+
+\begin{equation*}
+\mu_E = \nu_C \left( \mu_C^{\theta} + RT \ln(x_C \gamma_C) \right) + \nu_A \left( \mu_A^{\theta} + RT \ln(x_A \gamma_A) \right)
+\end{equation*}
+
+We say that the chemical potential of water is also expressed in terms of complete-dissociation mole fractions
+
+\begin{equation*}
+\mu_0 = \mu_0^{\theta} + RT \ln(x_0 \gamma_0)
+\end{equation*}
+\subsubsection*{4a. The Excess Gibbs Energy of Solvation}
+The Gibbs Free energy of the solution is
+
+\begin{equation*}
+G = n_0 \mu_0 + n_C \mu_C + n_A \mu_A
+\end{equation*}
+
+The Gibbs Free energy of the ideal solution is defined by
+
+\begin{equation*}
+G^{\text{ideal}} = \sum_k n_k \mu_k^{\theta} + RT \sum_k n_k \ln(x_k)
+\end{equation*}
+
+The excess Gibbs energy $G^E$ is defined as
+
+\begin{equation*}
+G^E = G - G^{\text{ideal}}
+\end{equation*}
+
+Substituting the previous we get
+
+\begin{equation*}
+G^E = RT \sum_k n_k \ln(\gamma_k)
+\end{equation*}
+
+\begin{equation}
+\left( \frac{\partial G^E}{\partial n_k} \right)_{T,P,n_j \neq k} = RT \ln(\gamma_k)
+\end{equation}
+
+So, we can write the Gibbs free energy is also the sum of all true, free species in the chemical equilibrium
+\begin{equation*}
+G^{\text{chem}} = n_0^f \mu_0^f + \sum_{i=0}^{N} n_{ci} \mu_{ci} + \sum_{i=0}^{N} n_{ai} \mu_{ai}
+\end{equation*}
+
+The chemical equilibrium condition says that the chemical potential of ions solvated with $i$ solvent, is equal to the chemical potential of unsolvated cations plus the number of solvent molecules bound
+
+\begin{equation*}
+\mu_{ci} = \mu_{c0} + i \mu_0^f
+\end{equation*}
+
+$G^{\text{slv}}$ then becomes
+
+\begin{equation*}
+G^{\text{chem}} = n_0^f \mu_0^f + \sum_{i=0}^{N} n_{ci} (\mu_{c0} + i \mu_0^f) + \sum_{i=0}^{N} n_{ai} (\mu_{a0} + i \mu_0^f)
+\end{equation*}
+
+\begin{equation*}
+G^{\text{chem}} = \left( n_0^f + \sum_{i=0}^{N} i n_{ci} \right) \mu_0^f + \sum_{i=0}^{N} n_{ci} \mu_{c0} + \sum_{i=0}^{N} n_{ai} \mu_{a0}
+\end{equation*}
+
+From Mass balance
+
+\begin{equation*}
+n_0 = n_0^f + \sum_{i=0}^{N} i n_{ci}
+\end{equation*}
+
+\begin{equation*}
+n_C = \sum_{i=0}^{N} n_{ci}
+\end{equation*}
+
+\begin{equation*}
+n_A = \sum_{i=0}^{N} n_{ai}
+\end{equation*}
+
+So $G^{\text{chem}}$ becomes
+
+\begin{equation*}
+G^{\text{chem}} = n_0 \mu_0^f + n_C \mu_{c0} + n_A \mu_{a0}
+\end{equation*}
+
+\begin{equation*}
+G = n_0 \mu_0 + n_C \mu_C + n_A \mu_A
+\end{equation*}
+
+By comparison
+
+\begin{equation*}
+\mu_0^f = \mu_0, \mu_{c0} = \mu_C, \mu_{a0} = \mu_A
+\end{equation*}
+
+We can say that the excess Gibbs Free Energy is then given as
+
+\begin{equation*}
+G^E = G^{\text{chem}} - G^{\text{ideal}}
+\end{equation*}
+The chemical potentials are
+
+\begin{equation}
+\mu_k = \mu_k^{\theta} + RT \ln(x_k \gamma_k^{\text{slv}})
+\end{equation}
+
+So $G^{\text{chem}}$ becomes
+
+\begin{equation*}
+G^{\text{chem}} = n_0 \left( \mu_0^{\theta} + RT \ln(x_0 \gamma_0^{\text{slv}}) \right) + n_C \left( \mu_C^{\theta} + RT \ln(x_C \gamma_C^{\text{slv}}) \right) + n_A \left( \mu_A^{\theta} + RT \ln(x_A \gamma_A^{\text{slv}}) \right)
+\end{equation*}
+
+\begin{equation*}
+G^{\text{ideal}} = \sum_k n_k \mu_k^{\theta} + RT \sum_k n_k \ln(x_k)
+\end{equation*}
+
+\begin{equation}
+\frac{G^E}{RT} = n_0 \ln(\gamma_0^{\text{slv}}) + n_C \ln(\gamma_C^{\text{slv}}) + n_A \ln(\gamma_A^{\text{slv}})
+\end{equation}
+\subsubsection*{4b. Defining Activity Coefficients from Chemical Potential}
+From these expressions we can determine the activity coefficients
+
+\begin{equation*}
+\mu_0^f = \mu_0
+\end{equation*}
+
+\begin{equation*}
+\mu_0^{\theta} + RT \ln(x_0^{\text{slv}}) = \mu_0^{\theta} + RT \ln(x_0 \gamma_0^{\text{slv}})
+\end{equation*}
+
+As standard state for the solvent components, the pure liquids are used.
+
+\begin{equation}
+\boxed{\ln(\gamma_0^{\text{slv}}) = \ln\left( \frac{x_0^{\text{slv}}}{x_0} \right) = \ln(\alpha_0)}
+\end{equation}
+
+From these expressions we can determine the activity coefficients
+
+\begin{equation*}
+\mu_{c0} = \mu_c, \mu_{a0} = \mu_a
+\end{equation*}
+
+\begin{equation*}
+\mu_C = \mu_C^{f,\theta} + RT \ln(x_C^{\text{slv}}) = \mu_C^{\theta} + RT \ln(x_C \gamma_C^{\text{slv}})
+\end{equation*}
+
+The standard state for cation and anion is taken as a hypothetical ideal dilute solution in solvent at unit mole fraction. However, ions are treated differently, where only cations solvate and anions do not.
+
+\begin{equation*}
+\ln(\gamma_C^{\text{slv}}) = \ln\left( \frac{x_C^{\text{slv}}}{x_C} \right) + \frac{1}{RT} (\mu_C^{\theta} - \mu_C^{\theta}) = \ln(\alpha_i)
+\end{equation*}
+
+\begin{equation*}
+\frac{1}{RT} (\mu_C^{f,\theta} - \mu_C^{\theta}) = \ln\left( \frac{\gamma_C^{\text{slv}} x_C}{x_C} \right)
+\end{equation*}
+
+This left hand side is constant, and can be determined at infinite dilution.
+
+\begin{equation}
+\gamma_C^{\text{slv}} = 1 \text{ as } x_C \rightarrow 0
+\end{equation}
+
+\begin{equation*}
+\frac{1}{RT} (\mu_C^f - \mu_C^{\theta}) = \ln\left( \frac{x_C}{x_C^{\text{slv}}} \right) = \ln\left( \frac{1}{\alpha_i^{\infty}} \right)
+\end{equation*}
+
+\begin{equation}
+\boxed{\ln(\gamma_C^{\text{slv}}) = \ln\left( \frac{x_C^{\text{slv}}}{x_C} \right) + \frac{1}{RT} (\mu_C^f - \mu_C^{\theta}) = \ln\left( \frac{\alpha_i}{\alpha_i^{\infty}} \right)}
+\end{equation}
+
+
+\subsection*{Step 5. Solvent Depletion and Alpha Corrections}
+\subsubsection*{5a. Defining the Solvent and Solute Correction Factors \( \alpha_0 \) and \( \alpha_i \)}
+We now introduce the correction for solvent depletion by defining \( \alpha_0 \), the ratio of free water mole fraction before and after Solvation:
+\begin{equation*}
+    \alpha_0 = \frac{x_w^{\text{slv}}}{x_w} = \frac{\text{(free solvent molecules after solvation)} / \text{(total molecules after solvation)}}{\text{(free solvent molecules before solvation)} / \text{(total molecules before solvation)}}
+\end{equation*}
+
+Let \( n_w \) be the number of water molecules and \( n_t \) be the total number of molecules before solvation. After solvation, some water molecules are bound, so:
+\begin{equation}
+    \boxed{x_w^{\text{slv}} = \frac{n_w - \sum_{i=0}^N \bar{h}_i n_i}{n_w + \sum_{i=0}^N n_i (1 - \bar{h}_i)}}
+\end{equation}
+Then we obtain:
+\begin{align}
+    \alpha_0 &= \frac{\left( \frac{n_w - \sum_{i=0}^N \bar{h}_i n_i}{n_w + \sum_{i=0}^N n_i (1 - \bar{h}_i)} \right)}{ \left( \frac{n_w}{n_t} \right)} \\
+    &= \boxed{\gamma_0=\frac{1 - \sum_{i=0}^N \bar{h}_i \frac{n_i}{n_w}}{x_w + \sum_{i=0}^N x_i (1 - \bar{h}_i)}}
+\end{align}
+
+
+We now define the species-specific correction \( \alpha_i \) as:
+\begin{align*}
+    \alpha_i &= \frac{x_i^{\text{slv}}}{x_i} \\
+    &= \frac{\frac{\text{total number of unbound ions after solvation}}{\text{total number of molecules after solvation}}} {\frac{\text{total number of unbound ions before solvation}}{\text{total number of molecules before solvation}}} \\
+    &= \left( \frac{\text{total number of unbound ions after solvation}}{\text{total number of unbound ions before solvation}} \right) \left( \frac{n_t}{n_t^{\text{slv}}} 
+\right)
+\end{align*}
+\( \alpha_i \) is a correction factor that quantifies how the mole fraction of species i is affected by the creation of new solvated species. It represents the ratio of the true mole fraction of free species after solvation to the apparent mole fraction before solvation is accounted for.\\
+Next, we denote:
+\begin{itemize}
+    \item $n_t^{\text{slv}}$ as the total number of unbound ions after solvation.
+    \item $n_t$ as the total number of unbound ions before solvation.
+\end{itemize}
+
+We will use the previously derived
+\begin{equation*}
+\sum_{i=0}^{N} x_i = \sum_{i=0}^{N} x_0 (k_x w)^i \frac{n!}{(n-i)! i!}
+\end{equation*}
+Multiply by $n_t^{slv}$
+\begin{equation*}
+n_i^{\text{slv}}= \sum_{i=0}^{N} n_i = \sum_{i=0}^{N} n_0 (k_x w)^i \frac{n!}{(n-i)! i!} = n_0 (1 + k x_w)^N
+\end{equation*}
+Rearranging
+\begin{equation*}
+\frac{n_0 (\text{total number of unbound ions after solvation})}{n_t^{\text{slv}} (\text{total number of unbound ions before solvation})} = \frac{1}{(1 + k x_w)^N}
+\end{equation*}
+Resubstituting
+\begin{equation*}
+\alpha_i = \frac{x_i^{\text{slv}}}{x_i} = \frac{n_t}{n_t^{\text{slv}} (1 + k x_w)^N} = \boxed{\frac{n_t^{\text{slv}}}{n_t} \frac{1}{(1 + k_x w)^N}}
+\end{equation*}
+Multiply and divide the denominator as by $n_{w}$
+\begin{equation*}
+\frac{n_w}{n_t} (1 + kx_w)^N \frac{n_t^{\text{slv}}}{n_w} = x_w (1 + kx_w)^N \frac{n_t^{\text{slv}}}{n_w}
+\end{equation*}
+The total number of molecules after solvation, \( n_t^{\text{slv}} \), consists of the initial number of water molecules \( n_w \), plus the total number of ions \( n_i \), minus the number of ions that are fully solvated (i.e., the number of bound water molecules). This subtraction is expressed as \( \sum_i n_i \bar{h}_i \), since \( \bar{h}_i \) is the average number of water molecules bound to each ion species \( i \).
+\begin{equation*}
+\frac{n_t^{\text{slv}}}{n_w} = \frac{n_w + \sum_{i=0} n_i (\text{total ions}) - \sum_{i=0} n_i \bar{n}_i (\text{bound ions})}{n_w} = 1 + \frac{1}{n_w} \sum_{i=0} n_i (1 - \bar{n}_i)
+\end{equation*}
+% Resubstituting
+% \begin{equation}
+% \alpha_i = \frac{1}{x_w (1 + kx_ w)^N \left( 1 + \frac{1}{n_w} \sum_{i \neq 0} n_i (1 - \bar{n}_i) \right)}
+% \end{equation}
+
+% In the limit of dilute solution.
+% \begin{equation}
+% \alpha_i^{\infty} = \lim_{x_w \to 1} \frac{1}{x_w (1 + k x_w)^N\left( 1 + \frac{1}{n_w} \sum_{i=0}^{N} n_i (1 - \bar{h}_i) \right)} = \frac{1}{(1 + k)^N}
+% \end{equation}
+\subsubsection*{5b. Final Expression for Solvating Species (Cations)}
+Consequently, this expression for cations looks like the following,
+
+\begin{equation}
+    \boxed{\gamma_i=\frac{\alpha_i}{\alpha_i^{\infty}}=\frac{(1 + k_i)^{N_i}}{x_w (1 + k_i x_w)^N\left( 1 + \frac{1}{n_w} \sum_{i=0}^{N} n_i (1 - \bar{h}_i) \right)}}
+\end{equation}
+\subsubsection*{5b. Final Expression for Non-solvating Species (Anions)}
+For anions who's binding constant is equal to 0, we get the following...
+
+\[
+    \gamma_i=\frac{\alpha_i}{\alpha_i^{\infty}}=\frac{(1 )^{N_i}}{x_w (1 )^N\left( 1 + \frac{1}{n_w} \sum_{i=0}^{N} n_i (1 - \bar{h}_i) \right)}
+\]
+However, for anions or species with zero hydration binding affinity (e.g., \( k_i = 0 \)), the expression simplifies considerably, as both numerator and denominator hydration terms reduce to unity. Thus, the solvation activity coefficient becomes:
+
+\begin{equation}
+\boxed{
+\gamma_i = \frac{1}{x_w \left(1 + \frac{1}{n_w} \sum_j n_j (1 - \bar{h}_j)\right)}
+}
+\end{equation}
+
+\noindent
+\textbf{Interpretation:} \\
+Even though the anion \( i \) does not bind water directly, its activity coefficient still reflects the global scarcity of free water. This arises due to competition from other hydrated species, which reduce the availability of solvent molecules for the entropy of mixing.
+
+\noindent
+In the limit of infinite dilution and pure solvent (\( x_w \rightarrow 1 \), \( n_j \rightarrow 0 \)), this recovers:
+
+\[
+\gamma_i \to 1 \qquad \text{(as expected)}
+\]
+\newpage
+\discussion{Summary of Solvation Models}
+% \hrulefill
+
+\subsection*{Key Assumptions of the Theory}
+
+The thermodynamic model for ion solvation is based on the Stokes-Robinson hydration framework and relies on the following key assumptions:
+
+\begin{itemize}
+    \item \textbf{Selective Solvation}: Cations are treated as the primary solvating species, while anions are assumed to have negligible binding affinity for the solvent (i.e., $k_{\text{anion}} = 0$).
+    \item \textbf{Identical and Independent Binding Sites}: For any given cation, all $N$ potential solvation sites are considered identical and bind solvent molecules independently of one another. This means the microscopic binding constant, $k$, is the same for each site.
+    \item \textbf{Activity-Concentration Equivalence}: For the purposes of deriving the equilibrium expressions, the activity of a species ($a_i$) is approximated by its mole fraction ($x_i$).
+\end{itemize}
+
+\hrulefill
+
+\subsection*{Summary of Methodology}
+
+The theory follows a logical progression from a molecular-scale concept to a macroscopic thermodynamic property:
+
+\begin{enumerate}
+    \item \textbf{Define Average Solvation Number}: The derivation begins by defining the \textbf{average solvation number} ($\overline{h}$) as the total number of bound solvent molecules per cation, based on species mass balances.
+    \item \textbf{Relate Equilibria via Combinatorics}: It distinguishes between \textbf{macroscopic equilibrium constants} ($K_i$), which describe the overall state of solvation, and a single \textbf{microscopic binding constant} ($k$), which describes the intrinsic affinity for a single site. These are related using binomial combinatorics to account for the number of available binding configurations.
+    \item \textbf{Derive a Closed-Form Expression}: A compact, closed-form expression for $\overline{h}$ is derived by substituting the relationship between $K_i$ and $k$ into the mass balance equations and evaluating the resulting summations using binomial identities.
+    \item \textbf{Calculate Free Energy}: The molecular model is connected to macroscopic thermodynamics by defining the \textbf{excess Gibbs free energy} ($G^E$) of the system as the difference between a real solution with solvated species ($G^{\text{chem}}$) and a hypothetical ideal solution ($G^{\text{ideal}}$).
+    \item \textbf{Find Chemical Potentials \& Activity Coefficients}: The non-ideal contribution to the chemical potential is found by equating the chemical potential of the "true" species in the solvated system with the "apparent" species in the ideal system. This introduces \textbf{alpha correction factors} ($\alpha_i$ and $\alpha_0$) that directly lead to the final expressions for the activity coefficients by accounting for the depletion of free solvent.
+\end{enumerate}
+
+\hrulefill
+
+\subsection*{Summary of Final Expressions}
+
+The key resulting expressions for the average solvation number and the solvation activity coefficients are summarized below.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|>{\raggedright\arraybackslash}p{6.4cm}|>{\centering\arraybackslash}p{8.6cm}|}
+\hline
+\textbf{Thermodynamic Quantity} & \textbf{Expression} \\
+\hline
+\textbf{Average Solvation Number} $\overline{h}_i$ & 
+$\displaystyle \frac{N_i k_i x_w}{1 + k_i x_w}$ \\
+\hline
+\textbf{Solvent Activity Coefficient} $\gamma_0$ &
+$\displaystyle \frac{1 - \sum_{i=0}^N \bar{h}_i \frac{n_i}{n_w}}{x_w + \sum_{i=0}^N x_i (1 - \bar{h}_i)}$ \\
+\hline
+\textbf{Solvating Species (Cation)} $\gamma_i$ & 
+$\displaystyle \frac{(1 + k_i)^{N_i}}{x_w (1 + k_i x_w)^{N_i} \left( 1 + \sum_j \frac{n_j}{n_w} (1 - \overline{h}_j) \right)}$ \\
+\hline
+\textbf{Non-Solvating Species (Anion)} $\gamma_i$ & 
+$\displaystyle \frac{1}{x_w \left( 1 + \sum_j \frac{n_j}{n_w}(1 - \overline{h}_j) \right)}$ \\
+\hline
+\end{tabular}
+\caption{Summary of key solvation model expressions. Here, $N_i$ is the number of solvation sites for ion $i$, $k_i$ is the microscopic binding constant, $x_w$ is the mole fraction of free water, and the term $\dfrac{n_j}{n_w}$ represents the ratio of moles of species $j$ to the moles of free water.}
+\label{tab:summary_solvation}
+\end{table}
+
+\hrulefill
+
+\subsection*{Summary of Alpha Corrections}
+
+The alpha correction factors quantify the change in the mole fraction of species due to the formation of solvated ion-solvent complexes. They are central to the final activity coefficient expressions. The non-ideal contribution to the chemical potential from solvation is directly related to these alpha factors:
+
+The final expressions for these correction factors are derived from the mass balances of the system before and after solvation is accounted for:
+
+\begin{itemize}
+    \item \textbf{Solvent Correction ($\alpha_0$)}: This is the ratio of the true mole fraction of free solvent after solvation ($x_w^{\text{slv}}$) to the apparent mole fraction before ($x_w$).
+    \[ \alpha_0 = \frac{x_w^{\text{slv}}}{x_w} = \frac{1 - \sum_{i} \overline{h}_i \dfrac{n_i}{n_w}}{x_w + \sum_{i} x_i (1 - \overline{h}_i)} \]
+    
+    \item \textbf{Solute Correction ($\alpha_i$)}: This is the ratio of the true mole fraction of free (unbound) ions after solvation ($x_i^{\text{slv}}$) to the apparent total mole fraction before ($x_i$). It is related to the microscopic binding constant through the following relationships:
+    \[ \alpha_i = \frac{n_t}{n_t^{\text{slv}}} \frac{1}{(1+k_i x_w)^{N_i}} \]
+    \[ \alpha_i^\infty = \lim_{x_w \to 1} \alpha_i = \frac{1}{(1 + k_i)^{N_i}} \]
+    where $n_t$ and $n_t^{\text{slv}}$ are the total moles of all free species before and after solvation, respectively, and $\alpha_i^\infty$ is the infinite dilution limit.
+\end{itemize}
+
 ::: {.column-screen-inset}
 <iframe class="anim-frame" 
         src="../tutorials/ion_solvation.html"
