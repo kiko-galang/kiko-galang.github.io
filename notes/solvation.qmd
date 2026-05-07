@@ -26,7 +26,7 @@ $$
 \bar{h}_i = \frac{N_i k_i x_0^{\mathrm{slv}}}{1 + k_i x_0^{\mathrm{slv}}}
 $$
 
-## Interactive Animation
+## Interactive Animation For Solvation
 
 ::: {.column-screen-inset}
 <iframe src="../tutorials/ion_solvation.html" 
