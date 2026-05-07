@@ -55,12 +55,13 @@ pre, code {
 /* Animation iframe */
 .anim-frame {
   width: 100%;
+  max-width: 820px;
   height: 520px;
   border-top: 2px solid var(--teal);
   border-bottom: 2px solid var(--teal);
   display: block;
   background: #04070e;
+  margin: 0 auto;
 }
-
 /* Content max width */
 .content-container { max-width: 820px !important; }
