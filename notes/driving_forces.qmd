@@ -1,0 +1,666 @@
+---
+title: "Origin of Driving Forces from Fundamentals"
+subtitle: "Entropy Production, Curtiss–Bird Driving Forces, and the Onsager Framework"
+---
+
+## Motivation
+
+Many continuum treatments of multicomponent transport identify the diffusion
+"driving force" with a chemical-potential gradient, often written schematically
+as $c_i\nabla\mu_i$ (or an equivalent normalized form). This perspective appears
+across electrolyte and porous-media modeling frameworks — in Crothers, Fong,
+Newman, and Weber — and is commonly traced back to the nonequilibrium-thermodynamic
+development of Hirschfelder–Curtiss–Bird and Curtiss–Bird. The algebra leading
+from the local entropy balance to a concrete multicomponent form is often
+unclear, which can make its use difficult without awareness of the underlying
+assumptions.
+
+This note derives the driving-force density following the work of Curtiss and
+Bird, starting from the local entropy balance and making each rearrangement
+explicit. The immediate goal is to clarify the most general origin of diffusion
+driving forces.
+
+In particular, we:
+
+1. Start from the Gibbs relation and the conservation laws to obtain the entropy
+   production $\sigma$;
+2. Identify the diffusive contribution and define a generalized driving force
+   $\mathbf{d}_i$;
+3. Define the corresponding force density $\mathbf{F}_i = cRT\mathbf{d}_i$.
+
+---
+
+## Notation
+
+| Symbol | Definition |
+|---|---|
+| $\hat{S}$ | Entropy per unit mass $[\mathrm{J\,kg^{-1}\,K^{-1}}]$ |
+| $\hat{U}$ | Internal energy per unit mass $[\mathrm{J\,kg^{-1}}]$ |
+| $D/Dt$ | Substantial derivative following mass-average velocity $\mathbf{v}$ |
+| $T$ | Temperature $[\mathrm{K}]$ |
+| $p$ | Pressure $[\mathrm{Pa}]$ |
+| $\rho$ | Total mass density $[\mathrm{kg\,m^{-3}}]$ |
+| $\omega_i$ | Mass fraction of species $i$ |
+| $M_i$ | Molar mass of species $i$ $[\mathrm{kg\,mol^{-1}}]$ |
+| $c_i$ | Molar concentration of species $i$ $[\mathrm{mol\,m^{-3}}]$ |
+| $\mu_i$ | Molar chemical potential of species $i$ $[\mathrm{J\,mol^{-1}}]$ |
+| $\bar{H}_i$ | Molar partial enthalpy of species $i$ $[\mathrm{J\,mol^{-1}}]$ |
+| $\mathbf{v}$, $\mathbf{v}_i$ | Mass-average and species velocities $[\mathrm{m\,s^{-1}}]$ |
+| $\mathbf{q}$ | Total heat flux $[\mathrm{W\,m^{-2}}]$ |
+| $\mathbf{q}^{(h)}$ | Modified heat flux (defined below) |
+| $\boldsymbol{\tau}$ | Viscous stress tensor $[\mathrm{Pa}]$ |
+| $\mathbf{j}_i$ | Diffusive mass flux relative to $\mathbf{v}$, with $\sum_i \mathbf{j}_i = \mathbf{0}$ |
+| $\mathbf{g}_i$ | Body force per unit mass on species $i$ $[\mathrm{m\,s^{-2}}]$ |
+| $g_S$ | Entropy production $[\mathrm{W\,m^{-3}\,K^{-1}}]$ |
+| $d_i$ | Curtiss–Bird diffusion driving force $[\mathrm{m^{-1}}]$ |
+| $\mathbf{F}_i = cRT\,d_i$ | Force density $[\mathrm{N\,m^{-3}}]$ |
+
+---
+
+## Part 1: Entropy Production and the Derivation of Driving Forces
+
+We follow the development in *Molecular Theory of Gases and Liquids*
+(Hirschfelder, Curtiss, Bird) and *Multicomponent Diffusion* (Curtiss, Bird),
+assuming the reader is comfortable with the standard continuum balance laws and
+basic thermodynamics. Transport in a given direction is a spontaneous microscopic
+process that dissipates free energy and produces entropy; under local equilibrium,
+the macroscopic dynamics can be described by thermodynamic forces and their
+conjugate fluxes.
+
+### The Fundamental Entropy Balance
+
+**Goal:** State the general entropy balance and determine the entropy production $\sigma$.
+
+We start from the local entropy balance in divergence form:
+
+$$
+\rho\frac{D\hat{S}}{Dt} = -\nabla\cdot\mathbf{s} + g_S
+$$ {#eq-entropy-balance-general}
+
+where $\mathbf{s}$ is the entropy flux and $g_S \ge 0$ is the local entropy
+production. Here $D/Dt$ is the substantial derivative:
+
+$$
+\frac{D(\cdot)}{Dt} = \frac{\partial(\cdot)}{\partial t} + \mathbf{v}\cdot\nabla(\cdot)
+$$
+
+We combine (i) a Gibbs relation for a multicomponent mixture with (ii) the
+conservation laws. Starting from the equilibrium Gibbs relation per unit mass:
+
+$$
+d\hat{U} = T\,d\hat{S} - p\,d\hat{V} + \sum_{i=1}^v \frac{\mu_i}{M_i}\,d\omega_i
+$$ {#eq-gibbs-relation}
+
+Taking the substantial derivative and rearranging:
+
+$$
+T \frac{D\hat{S}}{Dt}
+= \frac{D\hat{U}}{Dt}
++ p\,\frac{D(1/\rho)}{Dt}
+- \sum_{i=1}^v \frac{\mu_i}{M_i}\,\frac{D\omega_i}{Dt}
+$$ {#eq-gibbs-mtgl}
+
+### Step 1.1: Substitute Conservation Laws
+
+We replace the derivatives using the conservation equations.
+
+**A. Conservation of energy** (MTGL Eq. 11.1-4):
+
+$$
+\rho\frac{D\hat{U}}{Dt}
+= -\nabla\cdot\mathbf{q}
+- p\,(\nabla\cdot\mathbf{v})
+- (\boldsymbol{\tau}:\nabla\mathbf{v})
++ \sum_{i=1}^v \mathbf{j}_i\cdot\mathbf{g}_i
+$$ {#eq-energy}
+
+**B. Continuity equation** (MTGL Eq. 11.1-2):
+
+$$
+\frac{D(1/\rho)}{Dt}
+= -\frac{1}{\rho^2}\frac{D\rho}{Dt}
+= \frac{1}{\rho}(\nabla\cdot\mathbf{v})
+$$ {#eq-continuity}
+
+**C. Species continuity** (MTGL Eq. 11.1-1), neglecting reactions ($r_i = 0$):
+
+$$
+\rho\frac{D\omega_i}{Dt} = -\nabla\cdot\mathbf{j}_i
+$$ {#eq-species}
+
+### Step 1.2: The Substitution
+
+Multiply @eq-gibbs-mtgl by $\rho$ and substitute @eq-energy–@eq-species.
+The $p(\nabla\cdot\mathbf{v})$ terms cancel, giving:
+
+$$
+\rho\frac{D\hat{S}}{Dt}
+= -\frac{1}{T}\nabla\cdot\mathbf{q}
+-\frac{1}{T}(\boldsymbol{\tau}:\nabla\mathbf{v})
++ \frac{1}{T}\sum_{i=1}^v \mathbf{j}_i\cdot\mathbf{g}_i
++ \sum_{i=1}^v \frac{\mu_i}{M_i T}\,\nabla\cdot\mathbf{j}_i
+$$ {#eq-entropy-pre}
+
+### Step 1.3: Isolate Divergences
+
+Using $\nabla\cdot(A\mathbf{x}) = \mathbf{x}\cdot\nabla A + A\,\nabla\cdot\mathbf{x}$:
+
+$$
+-\frac{1}{T}\nabla\cdot\mathbf{q}
+= -\nabla\cdot\!\left(\frac{\mathbf{q}}{T}\right) - \frac{\mathbf{q}\cdot\nabla T}{T^2}
+$$
+
+$$
+\frac{\mu_i}{M_i T}\,\nabla\cdot\mathbf{j}_i
+= \nabla\cdot\!\left(\frac{\mu_i\mathbf{j}_i}{M_i T}\right) - \mathbf{j}_i\cdot\nabla\!\left(\frac{\mu_i}{M_i T}\right)
+$$
+
+Substituting back gives the entropy balance in the form @eq-entropy-balance-general,
+with the **entropy production**:
+
+$$
+\boxed{
+g_S
+= -\frac{\mathbf{q}\cdot\nabla T}{T^2}
+-\frac{1}{T}(\boldsymbol{\tau}:\nabla\mathbf{v})
+- \sum_{i=1}^v \mathbf{j}_i\cdot\nabla\!\left(\frac{\mu_i}{M_i T}\right)
++ \sum_{i=1}^v \frac{\mathbf{j}_i\cdot\mathbf{g}_i}{T}
+}
+$$ {#eq-entropy-production}
+
+---
+
+### Connection to Phenomenological (Flux–Force) Laws
+
+Thermodynamics requires $g_S \ge 0$. To guarantee positivity, one postulates
+**linear phenomenological laws**: each flux is proportional to its corresponding
+thermodynamic driving force.
+
+#### General Structure: Flux $\times$ Force
+
+From @eq-entropy-production, the entropy production is a sum of products:
+
+$$
+g_S
+= \underbrace{-\frac{1}{T^2}(\mathbf{q}\cdot\nabla T)}_{\text{thermal}}
+\underbrace{-\frac{1}{T}(\boldsymbol{\tau}:\nabla\mathbf{v})}_{\text{viscous}}
+\underbrace{-\sum_{i=1}^v \mathbf{j}_i\cdot\left[\nabla\!\left(\frac{\mu_i}{M_i T}\right) - \frac{\mathbf{g}_i}{T}\right]}_{\text{diffusive}}
+$$ {#eq-gs-flux-force}
+
+Written abstractly as $\sigma = \sum_k \mathbf{J}_k\cdot\mathbf{X}_k \ge 0$, where
+$\mathbf{J}_k$ is a flux and $\mathbf{X}_k$ its conjugate thermodynamic force.
+
+#### Identifying the Thermodynamic Forces
+
+**Heat conduction.** Using $\nabla(1/T) = -\nabla T/T^2$:
+
+$$
+-\frac{1}{T^2}(\mathbf{q}\cdot\nabla T) = \mathbf{q}\cdot\nabla\!\left(\frac{1}{T}\right)
+$$
+
+Flux–force pair: $\mathbf{J}_q = \mathbf{q}$, $\mathbf{X}_q = \nabla(1/T)$.
+Temperature gradients produce entropy through heat conduction.
+
+**Viscous dissipation.** $\mathbf{J}_\mathrm{visc} = \boldsymbol{\tau}$,
+$\mathbf{X}_\mathrm{visc} = -(1/T)\nabla\mathbf{v}$.
+Velocity gradients produce entropy.
+
+**Diffusion.** The diffusive flux–force pair is $\mathbf{J}_i = \mathbf{j}_i$ and:
+
+$$
+\mathbf{X}_i = -\nabla\!\left(\frac{\mu_i}{M_i T}\right) + \frac{\mathbf{g}_i}{T}
+$$
+
+Chemical-potential gradients and body forces produce entropy through mass transfer.
+
+#### Summary of Flux–Force Pairs
+
+| Phenomenon | Flux $\mathbf{J}$ | Force $\mathbf{X}$ |
+|---|---|---|
+| Heat conduction | $\mathbf{q}$ | $\nabla(1/T)$ |
+| Viscous dissipation | $\boldsymbol{\tau}$ | $-(1/T)\nabla\mathbf{v}$ |
+| Diffusion (species $i$) | $\mathbf{j}_i$ | $-\nabla(\mu_i/M_i T) + \mathbf{g}_i/T$ |
+
+#### Onsager Relations and Cross-Effects
+
+To ensure $g_S \ge 0$, assume linear flux–force relations:
+
+$$
+\mathbf{J}_a = \sum_b L_{ab}\,\mathbf{X}_b
+$$ {#eq-phenomenological}
+
+with a positive-semidefinite coefficient matrix $\mathbf{L}$. Off-diagonal terms
+capture the **Soret effect** (temperature gradient driving mass flux) and the
+**Dufour effect** (mass flux driving heat flux).
+
+---
+
+## Part 2: Defining the Generalized Driving Force
+
+**Goal:** Transform the raw chemical-potential gradient into the force-density
+form used by Crothers, Delacourt, and Weber.
+
+The diffusive entropy production is:
+
+$$
+g_S^{\mathrm{diff}}
+= - \sum_{i=1}^v \mathbf{j}_i\cdot\left[\nabla\!\left(\frac{\mu_i}{M_i T}\right) - \frac{\mathbf{g}_i}{T}\right]
+$$ {#eq-gs-diff}
+
+Since $\sum_{i=1}^v \mathbf{j}_i = \mathbf{0}$, there are only $v-1$ independent
+diffusive mass fluxes. The conjugate thermodynamic driving forces are similarly
+constrained by the Gibbs–Duhem equation.
+
+### Step 2.1: Deriving the Curtiss–Bird Driving Force $d_i$
+
+We start from the Gibbs–Duhem equation in the entropy representation:
+
+$$
+U\,d\!\left(\frac{1}{T}\right) + V\,d\!\left(\frac{p}{T}\right) - \sum_{i=1}^v N_i\,d\!\left(\frac{\mu_i}{T}\right) = 0
+$$ {#eq-gibbs-duhem-extensive}
+
+**Step 2.1a: Divide by volume.**
+Divide by $V$ and define $u := U/V$, $c_i := N_i/V$:
+
+$$
+u\,d\!\left(\frac{1}{T}\right) + d\!\left(\frac{p}{T}\right) - \sum_{i=1}^v c_i\,d\!\left(\frac{\mu_i}{T}\right) = 0
+$$
+
+**Step 2.1b: Replace differentials by spatial gradients** (local equilibrium):
+
+$$
+u\,\nabla\!\left(\frac{1}{T}\right) + \nabla\!\left(\frac{p}{T}\right) - \sum_{i=1}^v c_i\,\nabla\!\left(\frac{\mu_i}{T}\right) = \mathbf{0}
+$$
+
+Expanding the pressure term using the product rule:
+
+$$
+\nabla\!\left(\frac{p}{T}\right) = \frac{1}{T}\,\nabla p + p\,\nabla\!\left(\frac{1}{T}\right)
+$$
+
+Substituting:
+
+$$
+(u+p)\,\nabla\!\left(\frac{1}{T}\right) + \frac{1}{T}\,\nabla p - \sum_{i=1}^v c_i\,\nabla\!\left(\frac{\mu_i}{T}\right) = \mathbf{0}
+$$ {#eq-gibbs-duhem-gradient}
+
+**Step 2.1c: Replace $(u+p)$ by enthalpy density.**
+Since $h = u+p = \sum_{i=1}^v c_i\,\bar{H}_i$:
+
+$$
+\sum_{i=1}^v c_i\,\nabla\!\left(\frac{\mu_i}{T}\right) - \frac{1}{T}\,\nabla p - \sum_{i=1}^v c_i\,\bar{H}_i\,\nabla\!\left(\frac{1}{T}\right) = \mathbf{0}
+$$
+
+**Step 2.1d: Convert $\nabla(1/T)$ to $\nabla T$.**
+Using $\nabla(1/T) = -\nabla T/T^2$:
+
+$$
+\sum_{i=1}^v c_i\,\nabla\!\left(\frac{\mu_i}{T}\right) - \frac{1}{T}\,\nabla p + \sum_{i=1}^v c_i\,\frac{\bar{H}_i}{T^2}\,\nabla T = \mathbf{0}
+$$ {#eq-gibbs-duhem-gradient4}
+
+**Step 2.1e: Replace $c_i = \rho_i/M_i$** (Curtiss–Bird Eq. 1.4):
+
+$$
+\sum_{i=1}^v \rho_i\,\nabla\!\left(\frac{\mu_i}{M_i T}\right) - \frac{1}{T}\,\nabla p + \sum_{i=1}^v \rho_i\,\frac{\bar{H}_i}{M_i T^2}\,\nabla T = \mathbf{0}
+$$ {#eq-gibbs-duhem-zero}
+
+**Step 2.1f: Decouple heat and mass transfer contributions.**
+
+Since $\sum_i \rho_i/\rho = 1$, we write @eq-gibbs-duhem-zero term-by-term:
+
+$$
+\sum_{i=1}^v \left[
+\rho_i\,\nabla\!\left(\frac{\mu_i}{M_i T}\right)
+- \frac{\rho_i}{\rho}\,\frac{1}{T}\,\nabla p
++ \rho_i\,\frac{\bar{H}_i}{M_i T^2}\,\nabla T
+\right] = \mathbf{0}
+$$ {#eq-gibbs-duhem-summed}
+
+Ignoring viscous dissipation and adding the pressure and enthalpy terms inside
+the species summation so the Gibbs–Duhem constraint can be invoked:
+
+$$
+g_S
+= -\frac{1}{T^2}(\mathbf{q}\cdot\nabla T)
+- \sum_{i=1}^v \frac{\mathbf{j}_i}{\rho_i}\cdot\Bigg[
+\underbrace{\rho_i\nabla\!\left(\frac{\mu_i}{M_i T}\right)
+- \frac{\rho_i}{\rho}\,\frac{1}{T}\,\nabla p
++ \rho_i\frac{\bar{H}_i}{M_i T^2}\,\nabla T}_{\text{(A) constrained by Gibbs--Duhem} = 0}
+\;\underbrace{-\rho_i\frac{\bar{H}_i}{M_i T^2}\,\nabla T}_{\text{(B) ``free'' term}}
++ \rho_i \frac{\mathbf{g}_i}{T}
++ \frac{1}{T}\frac{\rho_i}{\rho}\sum_{j=1}^v\rho_j\mathbf{g}_j\Bigg]
+$$ {#eq-gs-addzero}
+
+Term (A) equals zero by the Gibbs–Duhem constraint @eq-gibbs-duhem-summed.
+The last two body-force terms also cancel (see Supplementary Material):
+
+$$
+g_S
+= -\frac{1}{T^2}(\mathbf{q}\cdot\nabla T)
+- \sum_{i=1}^v \frac{\mathbf{j}_i}{\rho_i}\cdot
+\left[
+-\rho_i\frac{\bar{H}_i}{M_i T^2}\,\nabla T
+\right]
+$$
+
+**Heat-flux decomposition and cancellation of the enthalpy term.**
+
+Define the **modified heat flux** (Curtiss–Bird):
+
+$$
+\mathbf{q}^{(h)} := \mathbf{q} - \sum_{i=1}^v \frac{\bar{H}_i}{M_i}\,\mathbf{j}_i
+$$ {#eq-q0-def}
+
+Substituting $\mathbf{q} = \mathbf{q}^{(h)} + \sum_i (\bar{H}_i/M_i)\mathbf{j}_i$
+into the thermal contribution, the enthalpy terms cancel exactly, and we recover
+the full entropy production with the modified heat flux:
+
+$$
+g_S
+= -\frac{1}{T^2}(\mathbf{q}^{(h)}\cdot\nabla T)
+- \sum_{i=1}^v \frac{\mathbf{j}_i}{\rho_i}\cdot\Bigg[
+\rho_i\nabla\!\left(\frac{\mu_i}{M_i T}\right)
+- \frac{\rho_i}{\rho}\,\frac{1}{T}\,\nabla p
++ \rho_i\frac{\bar{H}_i}{M_i T^2}\,\nabla T
++ \rho_i\,\frac{\mathbf{g}_i}{T}
++ \frac{1}{T}\,\frac{\rho_i}{\rho}\sum_{j=1}^v \rho_j\mathbf{g}_j\Bigg]
+$$
+
+**Step 2.1g: Define the generalized driving force $d_i$.**
+
+Focus on the diffusion entropy production. Following Curtiss–Bird, introduce
+driving forces $d_i$ (units: reciprocal length) via the normalization
+$(cRT/\rho_i)d_i$:
+
+$$
+\boxed{
+\frac{cRT}{\rho_i} d_i
+= T\nabla\!\left(\frac{\mu_i}{M_i T}\right)
++ \frac{\bar{H}_i}{M_i}\nabla\ln T
+- \frac{1}{\rho}\nabla p
+- \mathbf{g}_i
++ \frac{1}{\rho}\sum_{j=1}^v \rho_j\mathbf{g}_j
+}
+$$ {#eq-di-curtiss-bird}
+
+### Step 2.2: Convert to Force-Density Units
+
+Define $\mathbf{F}_i := cRT\,d_i$, so multiplying @eq-di-curtiss-bird by $\rho_i$:
+
+$$
+\mathbf{F}_i
+= \rho_i T\nabla\!\left(\frac{\mu_i}{M_i T}\right)
++ \rho_i\frac{\bar{H}_i}{M_i}\nabla\ln T
+- \omega_i\nabla p
+- \rho_i\mathbf{g}_i
++ \omega_i\sum_{j=1}^v \rho_j\mathbf{g}_j
+$$ {#eq-Fi-general}
+
+**Step 2.2a: Substitute mass-to-molar relations.**
+Use $\rho_i = c_i M_i$ and $g_i = X_i/M_i$ (where $X_i$ is force per mole).
+
+**Step 2.2b: Evaluate each term:**
+
+$$
+\rho_i T\nabla\!\left(\frac{\mu_i}{M_i T}\right)
+= c_i\!\left(\nabla\mu_i - \frac{\mu_i}{T}\nabla T\right)
+$$
+
+$$
+\rho_i\frac{\bar{H}_i}{M_i}\nabla\ln T
+= c_i\,\frac{\bar{H}_i}{T}\,\nabla T
+$$
+
+**Step 2.2c: Assemble and factor:**
+
+$$
+\boxed{
+\mathbf{F}_i
+= c_i\!\left(\nabla\mu_i + \frac{\bar{H}_i-\mu_i}{T}\,\nabla T
+- \frac{M_i}{\rho}\nabla p
+- X_i
++ \frac{M_i}{\rho}\sum_{j=1}^v c_j X_j\right)
+}
+$$ {#eq-Fi-molar}
+
+---
+
+## Part 3: From Driving Force to the Curtiss–Bird Flux Law
+
+**Goal:** Apply Onsager's phenomenological framework to obtain the Curtiss–Bird
+constitutive flux equation.
+
+### Step 3.1: Write the Dissipation Function
+
+Multiply the entropy production by $T$ to form the dissipation function
+$\Phi := Tg_S$. Substituting the definition of $d_i$:
+
+$$
+\Phi = -\mathbf{q}^{(h)}\cdot\nabla\ln T \;-\; \sum_{i=1}^v \mathbf{j}_i\cdot\frac{cRT}{\rho_i}\,d_i
+$$ {#eq-dissipation}
+
+Define shorthand forces:
+
+$$
+L_0 := \nabla\ln T,\qquad L_i := \frac{cRT}{\rho_i}\,d_i
+$$
+
+### Step 3.2: Count the Independent Flux–Force Pairs
+
+**Flux side.** $\sum_{i=1}^v \mathbf{j}_i = \mathbf{0}$ leaves $v-1$ independent
+diffusion fluxes.
+
+**Force side.** $\sum_{i=1}^v \rho_i\,d_i = 0$ by Gibbs–Duhem, leaving $v-1$
+independent forces.
+
+**Removing redundancy.** Since $\sum_i \mathbf{j}_i = \mathbf{0}$, we may
+subtract any species-independent vector from each $L_i$:
+
+$$
+\sum_{i=1}^v \mathbf{j}_i\cdot L_i
+= \sum_{i\neq k} \mathbf{j}_i\cdot (L_i - L_k)
+$$
+
+### Step 3.3: Apply Onsager Linear Phenomenological Laws
+
+$$
+\mathbf{q}^{(h)} = -R_{00}\,L_0 - \sum_{j\neq k} R_{0j}\,(L_j - L_k)
+$$ {#eq-onsager-q}
+
+$$
+\mathbf{j}_i = -R_{i0}\,L_0 - \sum_{j\neq k} R_{ij}\,(L_j - L_k),\qquad i\neq k
+$$ {#eq-onsager-j}
+
+with Onsager reciprocal relations $R_{ij} = R_{ji}$.
+
+**Physical meaning of off-diagonal terms:**
+
+| Coefficient | Effect |
+|---|---|
+| $R_{00}$ | Thermal conduction |
+| $R_{ii}$ | Self-diffusion |
+| $R_{i0} = R_{0i}$ | **Soret effect** (thermal → mass flux) |
+| $R_{0j} = R_{j0}$ | **Dufour effect** (mass → heat flux) |
+| $R_{ij},\; i\neq j$ | Cross-diffusion |
+
+### Step 3.4: Extend the Summation to All Species
+
+Summing @eq-onsager-j over all $i\neq k$ and requiring $\sum_{i\neq k}\mathbf{j}_i = -\mathbf{j}_k$:
+
+$$
+\sum_{i=1}^v R_{ij} = 0 \qquad \text{for all } j
+$$
+
+This defines $R_{kj} := -\sum_{i\neq k} R_{ij}$, allowing the sum to extend
+to all species:
+
+$$
+\sum_{j\neq k} R_{ij}(L_j - L_k)
+= \sum_{j=1}^v R_{ij}L_j
+$$
+
+**Result:**
+
+$$
+\mathbf{j}_i = -R_{i0}\,\nabla\ln T \;-\; \sum_{j=1}^v R_{ij}\,\frac{cRT}{\rho_j}\,d_j,
+\qquad i=1,\ldots,v
+$$ {#eq-ji-extended}
+
+### Step 3.5: Identify Physical Transport Coefficients
+
+**Thermal diffusion coefficient:**
+
+$$
+D_i^T := R_{i0} \qquad [\mathrm{kg\,m^{-1}\,s^{-1}}]
+$$
+
+With $\sum_i D_i^T = 0$ (only $v-1$ independent).
+
+**Symmetric multicomponent diffusivity:**
+
+$$
+\tilde{D}_{ij} := \frac{cRT\,R_{ij}}{\rho_i\rho_j} \qquad [\mathrm{m^2\,s^{-1}}]
+$$
+
+Onsager symmetry gives $\tilde{D}_{ij} = \tilde{D}_{ji}$ immediately.
+
+### Step 3.6: The Curtiss–Bird Constitutive Flux Equation
+
+$$
+\boxed{
+\mathbf{j}_i = -D_i^T\,\nabla\ln T \;-\; \rho_i\!\sum_{j=1}^v \tilde{D}_{ij}\,d_j
+}
+$$ {#eq-curtiss-bird-flux}
+
+**Reading this equation:**
+
+- **First term** $(-D_i^T\,\nabla\ln T)$: the **Soret (thermal diffusion)**
+  contribution. A temperature gradient alone drives a mass flux even at uniform
+  composition.
+- **Second term** $(-\rho_i\sum_j \tilde{D}_{ij}\,d_j)$: the **multicomponent
+  diffusion** contribution. The flux of species $i$ depends on the driving forces
+  of *all* species $j$ through the symmetric matrix $\tilde{D}_{ij}$.
+
+**Connection to Newman's equation 13.1.** The combination that emerges from
+substituting @eq-curtiss-bird-flux into the Stefan–Maxwell force balance is:
+
+$$
+A_j^i := \frac{D_j^T}{\rho_j} - \frac{D_i^T}{\rho_i}
+$$
+
+which is precisely the quantity Newman defines. This confirms that Newman's
+thermal diffusion correction is not an independent ingredient — it is the
+Stefan–Maxwell re-expression of the Curtiss–Bird Soret coefficient.
+
+---
+
+## Summary
+
+@eq-Fi-molar provides a generalized view of multicomponent diffusion driving
+forces: gradients in chemical potential, temperature (Soret effect), pressure
+(pressure diffusion), and differential body forces that act differently on
+different species (forced diffusion). In electrochemical applications, none of
+these terms can always be neglected. Examples include:
+
+- Thermogalvanic cells (temperature gradients)
+- Pressure-driven transport in PEM fuel cells
+- Sedimentation in semi-solid flow batteries
+- Centrifugal isotope separation
+
+The "Newman approach" incorporates the electrostatic potential into the chemical
+potential to define the electrochemical potential,
+$\bar{\mu}_i = \mu_i + z_i F\phi$, so the driving force becomes
+$\nabla\bar{\mu}_i = \nabla\mu_i + z_iF\nabla\phi$. This is consistent with
+the generalized derivation above. More rigorous electrodynamic treatments
+(Fong and Mandadapu) recover this familiar form explicitly from first principles
+via the internal entropy production.
+
+---
+
+## Connection to Stefan–Maxwell Framework
+
+Under isothermal, isobaric conditions with no body forces, the Curtiss–Bird
+driving force leads naturally to the Stefan–Maxwell equations:
+
+$$
+c_i \nabla \mu_i
+= \sum_{j\neq i} K_{ij}\left(\mathbf{v}_j-\mathbf{v}_i\right)
+$$ {#eq-stefan-maxwell}
+
+This is a force balance: the thermodynamic force on species $i$ (left) is
+balanced by frictional forces between species $i$ and each other species. The
+Stefan–Maxwell coefficients relate to binary diffusivities as:
+
+$$
+K_{ij} = \frac{RT\,c_i c_j}{c_T D_{ij}}
+$$
+
+Fuller and Newman show this can be inverted to obtain the Onsager flux form:
+
+$$
+N_i = -\sum_k \left(L_{ik}\,c_i c_k\,\nabla \mu_k\right)
+$$
+
+These equivalences — driving-force form, Stefan–Maxwell, Onsager flux — will
+serve as the starting point for examining what assumptions allow reduction to
+Ohm's law, Fick's laws, and the Nernst–Planck equation.
+
+---
+
+## Supplementary Material: The Body Force Terms
+
+In @eq-gs-addzero we introduced a body-force term and stated it contributes
+zero. Here we show why explicitly.
+
+The diffusive fluxes satisfy $\sum_{i=1}^v \mathbf{j}_i = \mathbf{0}$, so for
+any species-independent vector field $\boldsymbol{\Psi}$:
+
+$$
+\sum_{i=1}^v \mathbf{j}_i\cdot\boldsymbol{\Psi}
+= \boldsymbol{\Psi}\cdot\sum_{i=1}^v \mathbf{j}_i = 0
+$$
+
+**Define the mixture-average body force:**
+
+$$
+\mathbf{g}^{\mathrm{mix}} := \sum_{j=1}^v \frac{\rho_j}{\rho}\,\mathbf{g}_j
+$$
+
+**Decompose $\mathbf{g}_i$:**
+
+$$
+\mathbf{g}_i = \big(\mathbf{g}_i-\mathbf{g}^{\mathrm{mix}}\big) + \mathbf{g}^{\mathrm{mix}}
+$$
+
+Substituting into the body-force entropy production:
+
+$$
+\sum_{i=1}^v \mathbf{j}_i\cdot\frac{1}{T}\mathbf{g}_i
+= \sum_{i=1}^v \mathbf{j}_i\cdot\frac{1}{T}(\mathbf{g}_i-\mathbf{g}^{\mathrm{mix}})
++ \underbrace{\frac{1}{T}\,\mathbf{g}^{\mathrm{mix}}\cdot\sum_{i=1}^v \mathbf{j}_i}_{=\; 0}
+$$
+
+**Physical interpretation.** A body force that accelerates all species equally
+($\mathbf{g}_i = \mathbf{g}$ for all $i$) produces
+$\mathbf{g}_i - \mathbf{g}^{\mathrm{mix}} = \mathbf{0}$ and drives no diffusion.
+Only **differential** body forces (e.g., electric forces depending on charge,
+magnetic forces) contribute to the driving force — which is the physically
+correct result.
+
+Expanding:
+
+$$
+\mathbf{g}_i - \mathbf{g}^{\mathrm{mix}}
+= \mathbf{g}_i - \frac{1}{\rho}\sum_{j=1}^v \rho_j\mathbf{g}_j
+$$
+
+This replacement of $\mathbf{g}_i$ by $\mathbf{g}_i - \mathbf{g}^{\mathrm{mix}}$
+inside the driving term produces the additional mixture-average correction:
+
+$$
+-\mathbf{g}_i
+\;\longrightarrow\;
+-\mathbf{g}_i + \frac{1}{\rho}\sum_{j=1}^v \rho_j\mathbf{g}_j
+$$
+
+which is precisely the "extra" term appearing in @eq-di-curtiss-bird.
