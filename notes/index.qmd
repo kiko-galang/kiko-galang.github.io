@@ -1,0 +1,13 @@
+---
+title: "Electrochemistry Notes"
+subtitle: "A companion to the Boettcher course"
+---
+
+Welcome! These are living notes and derivations covering 
+electrochemical thermodynamics, kinetics, and transport.
+
+## Contents
+
+- [Ion Solvation](solvation.qmd)
+
+More coming soon.

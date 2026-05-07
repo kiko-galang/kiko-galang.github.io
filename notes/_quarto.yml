@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: ../docs/notes
+
+website:
+  title: "Electrochemistry Notes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - href: https://kiko-galang.github.io
+        text: ← Main Site
+
+format:
+  html:
+    theme: cosmo
+    mainfont: Georgia
+    monofont: "Space Mono"
+    toc: true
+    toc-depth: 3
+    html-math-method: mathjax

@@ -1,0 +1,26 @@
+name: Publish Notes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'notes/**'
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render Notes
+        run: quarto render notes/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/notes
+          destination_dir: notes

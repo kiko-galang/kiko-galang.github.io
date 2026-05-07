@@ -1,0 +1,36 @@
+---
+title: "Ion Solvation"
+subtitle: "Stokes–Robinson / Zerres–Prausnitz"
+---
+
+## Overview
+
+In concentrated solutions, solvation adjusts the entropy 
+of mixing because a non-trivial fraction of solvent molecules 
+is removed from the free bulk pool when they form ion 
+hydration shells.
+
+## Governing Equations
+
+The excess Gibbs free energy from solvation is:
+
+$$
+\frac{\Delta G^{\mathrm{slv}}}{RT}
+= n_0 \ln \alpha_0
++ \sum_{i \neq 0} n_i \ln\!\left(\frac{\alpha_i}{\alpha_i^{\infty}}\right)
+$$
+
+The average solvation number follows a Langmuir expression:
+
+$$
+\bar{h}_i = \frac{N_i k_i x_0^{\mathrm{slv}}}{1 + k_i x_0^{\mathrm{slv}}}
+$$
+
+## Interactive Animation
+
+::: {.column-screen-inset}
+<iframe src="../tutorials/ion_solvation.html" 
+        height="520px" width="100%" 
+        frameborder="0">
+</iframe>
+:::
