@@ -8,6 +8,6 @@ electrochemical thermodynamics, kinetics, and transport.
 
 ## Contents
 
-- [Ion Solvation](solvation.qmd)
+- [Ion Solvation](solvation.html)
 
 More coming soon.

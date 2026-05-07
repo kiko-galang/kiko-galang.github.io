@@ -18,9 +18,18 @@ jobs:
       - name: Render Notes
         run: quarto render notes/
 
+      - name: Copy notes output into site
+        run: |
+          mkdir -p _site/notes
+          cp -r docs/notes/. _site/notes/
+          cp -r images _site/images || true
+          cp index.html _site/
+          cp baking.html _site/ || true
+          cp cv.html _site/ || true
+          cp -r tutorials _site/tutorials || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/notes
-          destination_dir: notes
+          publish_dir: ./_site
